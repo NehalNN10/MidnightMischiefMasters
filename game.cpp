@@ -1,5 +1,6 @@
 #include "game.hpp"
-//#include "HUMania.hpp"
+#include "mover.hpp"
+//assets
 bool Game::init()
 {
 	//Initialization flag
@@ -60,9 +61,9 @@ bool Game::loadMedia()
 	//Loading success flag
 	bool success = true;
 	
-	//assets = loadTexture("assets.png");
+	assets = loadTexture("assets.png");
     gTexture = loadTexture("background.png");
-	if(gTexture==NULL)
+	if(gTexture==NULL || assets==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
         success =false;
@@ -73,8 +74,8 @@ bool Game::loadMedia()
 void Game::close()
 {
 	//Free loaded images
-	//SDL_DestroyTexture(assets);
-	//assets=NULL;
+	SDL_DestroyTexture(assets);
+	assets=NULL;
 	SDL_DestroyTexture(gTexture);
 	
 	//Destroy window
@@ -128,6 +129,10 @@ void Game::run( )
 			{
 				quit = true;
 			}
+			if(e.type == SDL_KEYDOWN)	
+						moveAlex(gRenderer, assets, e.key.keysym.sym);
+					// update();	
+				}
 
 			// if(e.type == SDL_MOUSEBUTTONDOWN){
 			// //this is a good location to add pigeon in linked list.
@@ -141,7 +146,8 @@ void Game::run( )
 		SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
 		//***********************draw the objects here********************
 
-		//drawObjects(gRenderer);
+		drawObjects(gRenderer, assets);
+		//moveAlex(gRenderer, assets, )
 
 		//****************************************************************
     	SDL_RenderPresent(gRenderer); //displays the updated renderer
@@ -149,4 +155,3 @@ void Game::run( )
 	    SDL_Delay(200);	//causes sdl engine to delay for specified miliseconds
 	}
 			
-}
