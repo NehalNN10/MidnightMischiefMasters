@@ -1,22 +1,18 @@
+#pragma once
 #include <SDL.h>
+#include "position.hpp"
+#include "speed.hpp"
 
 class character {
-    public:
-        // made everything public for now
-        SDL_Rect srsRect, moverRect;
+private:
+    position *p;
+    speed *s;
 
-        character(SDL_Rect srs, SDL_Rect mover);
-        void draw();
-        virtual void move() = 0;
-};#include "position.hpp"
-#include "speed.hpp"
-#pragma once
+public:
+    // made everything public for now
+    SDL_Rect srsRect, moverRect;
 
-class Character
-{
-
-    private:
-        position* p;
-        speed* s;
-
+    character(SDL_Rect srs, SDL_Rect mover);
+    void draw();
+    virtual void move() = 0;
 };
