@@ -13,6 +13,6 @@ public:
     SDL_Rect srcRect, moverRect;
 
     character(SDL_Rect src, SDL_Rect mover);
-    void draw();
+    // void draw();
     virtual void move() = 0;
 };

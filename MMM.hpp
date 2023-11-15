@@ -12,5 +12,6 @@ class MMM {
 
     public: // making everything public for now
         MMM();
-        void draw();
+        void draw(SDL_Renderer* gRenderer, SDL_Texture* assets);
+
 };

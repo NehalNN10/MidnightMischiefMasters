@@ -119,7 +119,7 @@ void Game::run()
 	{
 	bool quit = false;
 	SDL_Event e;
-	// MMM a;
+	MMM a;
 
 	while( !quit )
 	{
@@ -142,7 +142,8 @@ void Game::run()
 
 
 		// drawObjects(gRenderer, assets);
-		a.draw();
+		a.draw(gRenderer, assets);
+
 		//moveAlex(gRenderer, assets, )
 
     	SDL_RenderPresent(gRenderer); //displays the updated renderer

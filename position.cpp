@@ -9,10 +9,10 @@ position::position()
 int* position::get_coord()
 {
     int *coord = new int[2];
+    
     coord[0] = x_coord;
-    ;
     coord[1] = y_coord;
-    ;
+
     return coord;
 }
 
