@@ -4,8 +4,13 @@
 #include "watergirl.hpp"
 
 class MMM {
-    public: // making everything public for now
-        SDL_Window *gwindow = NULL;
+
+    private:
+        SDL_Window *gwindow;
         fireboy one;
-        watergirl two;          
+        watergirl two;
+
+    public: // making everything public for now
+        MMM();
+        void draw();
 };

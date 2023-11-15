@@ -1,5 +1,6 @@
 #include "game.hpp"
-#include "mover.hpp"
+// #include "mover.hpp"
+#include "MMM.hpp"
 //assets
 bool Game::init()
 {
@@ -115,9 +116,11 @@ SDL_Texture* Game::loadTexture( std::string path )
 	return newTexture;
 }
 void Game::run()
-{
+	{
 	bool quit = false;
 	SDL_Event e;
+
+	MMM a;
 	
 
 	while( !quit )
@@ -140,11 +143,13 @@ void Game::run()
 		//***********************draw the objects here********************
 
 
-		drawObjects(gRenderer, assets);
+		// drawObjects(gRenderer, assets);
+		a.draw();
 		//moveAlex(gRenderer, assets, )
 
     	SDL_RenderPresent(gRenderer); //displays the updated renderer
 
 	    SDL_Delay(200);	//causes sdl engine to delay for specified miliseconds
+	}
 	}
 			

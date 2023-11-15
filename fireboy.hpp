@@ -2,6 +2,7 @@
 #include "character.hpp"
 
 class fireboy : public character {
-    fireboy();
-    void move();
+    public:
+        fireboy();
+        void move();
 };

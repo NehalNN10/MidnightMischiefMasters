@@ -10,9 +10,9 @@ private:
 
 public:
     // made everything public for now
-    SDL_Rect srsRect, moverRect;
+    SDL_Rect srcRect, moverRect;
 
-    character(SDL_Rect srs, SDL_Rect mover);
+    character(SDL_Rect src, SDL_Rect mover);
     void draw();
     virtual void move() = 0;
 };

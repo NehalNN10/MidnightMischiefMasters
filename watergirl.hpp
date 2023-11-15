@@ -2,6 +2,7 @@
 #include "character.hpp"
 
 class watergirl : public character {
-    watergirl();
-    void move();
+    public:
+        watergirl();
+        void move();
 };

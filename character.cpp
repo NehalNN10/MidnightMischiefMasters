@@ -1,7 +1,8 @@
 #include "character.hpp"
+#include "drawing.hpp"
 
-character::character(SDL_Rect srs, SDL_Rect mover) {
-    srsRect = srs;
+character::character(SDL_Rect src, SDL_Rect mover) {
+    srcRect = src;
     moverRect = mover;
 }
 
