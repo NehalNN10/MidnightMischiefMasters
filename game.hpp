@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-
-
 class Game{
     //Screen dimension constants
     const int SCREEN_WIDTH = 1000;

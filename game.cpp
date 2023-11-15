@@ -1,5 +1,6 @@
 #include "game.hpp"
-//#include "HUMania.hpp"
+#include "mover.hpp"
+//assets
 bool Game::init()
 {
 	//Initialization flag
@@ -60,9 +61,9 @@ bool Game::loadMedia()
 	//Loading success flag
 	bool success = true;
 	
-	//assets = loadTexture("assets.png");
+	assets = loadTexture("assets.png");
     gTexture = loadTexture("background.png");
-	if(gTexture==NULL)
+	if(gTexture==NULL || assets==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
         success =false;
@@ -73,8 +74,8 @@ bool Game::loadMedia()
 void Game::close()
 {
 	//Free loaded images
-	//SDL_DestroyTexture(assets);
-	//assets=NULL;
+	SDL_DestroyTexture(assets);
+	assets=NULL;
 	SDL_DestroyTexture(gTexture);
 	
 	//Destroy window
@@ -113,10 +114,11 @@ SDL_Texture* Game::loadTexture( std::string path )
 
 	return newTexture;
 }
-void Game::run( )
+void Game::run()
 {
 	bool quit = false;
 	SDL_Event e;
+	
 
 	while( !quit )
 	{
@@ -128,25 +130,21 @@ void Game::run( )
 			{
 				quit = true;
 			}
-
-			// if(e.type == SDL_MOUSEBUTTONDOWN){
-			// //this is a good location to add pigeon in linked list.
-			// 	int xMouse, yMouse;
-			// 	SDL_GetMouseState(&xMouse,&yMouse);
-			// 	createObject(xMouse, yMouse);
-			// }
+		
+			
 		}
 
 		SDL_RenderClear(gRenderer); //removes everything from renderer
 		SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);//Draws background to renderer
+
 		//***********************draw the objects here********************
 
-		//drawObjects(gRenderer);
 
-		//****************************************************************
+		drawObjects(gRenderer, assets);
+		//moveAlex(gRenderer, assets, )
+
     	SDL_RenderPresent(gRenderer); //displays the updated renderer
 
 	    SDL_Delay(200);	//causes sdl engine to delay for specified miliseconds
 	}
 			
-}
