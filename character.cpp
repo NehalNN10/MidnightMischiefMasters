@@ -5,6 +5,6 @@ character::character(SDL_Rect srs, SDL_Rect mover) {
     moverRect = mover;
 }
 
-character::draw() {
+void character::draw() {
     SDL_RenderCopy(Drawing::gRenderer, Drawing::assets, &srcRect, &moverRect);
 }

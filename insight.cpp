@@ -1,8 +1,9 @@
 #include "insight.hpp"
 #include "mover.hpp"
+#include <string>
 #include <vector>
 
-void makeMove(string direction){
+void makeMove(std::string direction){
     if (direction == "East"){
         moveEast();
     }
