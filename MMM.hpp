@@ -10,7 +10,7 @@ class MMM {
         fireboy one;
         watergirl two;
 
-    public: // making everything public for now
+    public:
         MMM();
         void draw(SDL_Renderer* gRenderer, SDL_Texture* assets);
 

@@ -119,7 +119,7 @@ void Game::run()
 	{
 	bool quit = false;
 	SDL_Event e;
-	MMM a;
+	MMM a; // game object, all game functions should be in MMM class
 
 	while( !quit )
 	{
@@ -142,7 +142,7 @@ void Game::run()
 
 
 		// drawObjects(gRenderer, assets);
-		a.draw(gRenderer, assets);
+		a.draw(gRenderer, assets); // drawing both objects and moving them diagonally
 
 		//moveAlex(gRenderer, assets, )
 

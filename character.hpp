@@ -9,10 +9,10 @@ private:
     speed *s;
 
 public:
-    // made everything public for now
+    // made everything public for now, should be private with their get set functions
     SDL_Rect srcRect, moverRect;
 
     character(SDL_Rect src, SDL_Rect mover);
-    // void draw();
-    virtual void move() = 0;
+    // void draw(); // not working right now. 
+    virtual void move() = 0; // pure virtual function
 };
