@@ -7,12 +7,14 @@ MMM::MMM()
     // SDL_Window *gwindow = NULL;
 }
 
-void MMM::draw(SDL_Renderer* gRenderer, SDL_Texture* assets)
+void MMM::draw(SDL_Renderer* gRenderer, SDL_Texture* assets, SDL_Keycode key, Uint32 eventType)
 {
     // draw fireboy and move it
     SDL_RenderCopy(gRenderer, assets, &one.srcRect, &one.moverRect);
-    one.move();
     // draw watergirl and move it
     SDL_RenderCopy(gRenderer, assets, &two.srcRect, &two.moverRect);
-    two.move();
+    if(eventType == SDL_KEYDOWN){ //if key is pressed only then movement is called.
+        two.move(key);
+        one.move(key);
+    }
 }

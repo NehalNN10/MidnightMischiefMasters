@@ -12,6 +12,6 @@ class MMM {
 
     public:
         MMM();
-        void draw(SDL_Renderer* gRenderer, SDL_Texture* assets);
+        void draw(SDL_Renderer* gRenderer, SDL_Texture* assets, SDL_Keycode key, Uint32 eventType);
 
 };

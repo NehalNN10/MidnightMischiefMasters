@@ -4,5 +4,5 @@
 class watergirl : public character {
     public:
         watergirl();
-        void move();
+        void move(SDL_Keycode key);
 };

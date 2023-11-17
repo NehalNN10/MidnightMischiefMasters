@@ -131,8 +131,9 @@ void Game::run()
 			{
 				quit = true;
 			}
-		
-			
+			if(e.type == SDL_KEYDOWN)
+				a.draw(gRenderer, assets, e.key.keysym.sym, e.type); // drawing both objects and moving them, calling this here to make sure only move during keydown
+
 		}
 
 		SDL_RenderClear(gRenderer); //removes everything from renderer
@@ -142,7 +143,8 @@ void Game::run()
 
 
 		// drawObjects(gRenderer, assets);
-		a.draw(gRenderer, assets); // drawing both objects and moving them diagonally
+		a.draw(gRenderer, assets, e.key.keysym.sym, e.type); // drawing both objects and moving them
+															//calling the function here as well to draw them initially
 
 		//moveAlex(gRenderer, assets, )
 

@@ -4,5 +4,5 @@
 class fireboy : public character {
     public:
         fireboy();
-        void move();
+        void move(SDL_Keycode key);
 };
