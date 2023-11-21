@@ -1,7 +1,10 @@
 #include "game.hpp"
-// #include "mover.hpp"
 #include "MMM.hpp"
-//assets
+#include "drawing.hpp"
+
+SDL_Renderer* Drawing::gRenderer = NULL;
+SDL_Texture* Drawing::assets = NULL;
+
 bool Game::init()
 {
 	//Initialization flag
@@ -131,8 +134,12 @@ void Game::run()
 			{
 				quit = true;
 			}
-			if(e.type == SDL_KEYDOWN)
-				a.draw(gRenderer, assets, e.key.keysym.sym, e.type); // drawing both objects and moving them, calling this here to make sure only move during keydown
+			// if(e.type == SDL_KEYDOWN)
+				// a.draw(gRenderer, assets, e.key.keysym.sym, e.type); // drawing both objects and moving them, calling this here to make sure only move during keydown
+				// a->movechars(e.key.keysym.sym, e.type);
+				// a->one.move();
+				// a->two.move();
+				// a.one.move(e.key.keysym.sym);
 
 		}
 
@@ -143,9 +150,10 @@ void Game::run()
 
 
 		// drawObjects(gRenderer, assets);
-		a.draw(gRenderer, assets, e.key.keysym.sym, e.type); // drawing both objects and moving them
+		// a.draw(gRenderer, assets, e.key.keysym.sym, e.type); // drawing both objects and moving them
 															//calling the function here as well to draw them initially
-
+		a.drawchars();
+		// a.one.draw();
 		//moveAlex(gRenderer, assets, )
 
     	SDL_RenderPresent(gRenderer); //displays the updated renderer

@@ -1,8 +1,14 @@
 #include "fireboy.hpp"
+#include <iostream>
 
-fireboy::fireboy() : character({779, 0, 294, 848},{0,0,50,50}){} //default co-ords to spawn character
+fireboy::fireboy(){
+    std::cout << "hello" << std::endl;
+    srcRect = {779, 0, 294, 848};
+    moverRect = {0, 0, 50, 50};
+} //default co-ords to spawn character
 
 void fireboy::move(SDL_Keycode key) { // movement of one character done using arrow keys
+    std::cout<<"moving the first character";
     
     if (key == SDLK_UP){
         if (moverRect.y-y_jump > 0)moverRect.y -= y_jump;

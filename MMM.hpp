@@ -7,11 +7,14 @@ class MMM {
 
     private:
         SDL_Window *gwindow;
-        fireboy one;
-        watergirl two;
+        character *one = new fireboy();
+        character *two = new watergirl();
 
     public:
         MMM();
-        void draw(SDL_Renderer* gRenderer, SDL_Texture* assets, SDL_Keycode key, Uint32 eventType);
+        // void drawchars();
+        void drawchars();
+
+        void movechars(SDL_Keycode key, Uint32 eventType);
 
 };
