@@ -22,9 +22,7 @@ class Game{
     //global reference to png image sheets
     SDL_Texture* assets=NULL;
     
-
 public:
-
     bool init();
     bool loadMedia();
     void close();

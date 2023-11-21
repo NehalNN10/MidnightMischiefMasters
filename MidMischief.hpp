@@ -13,6 +13,7 @@ class MidMischief {
     public:
         MidMischief();
         void drawchars();
-        void movechars(SDL_Keycode key, Uint32 eventType);
+        void animatechars();
+        void movechars(SDL_Keycode key);
 
 };

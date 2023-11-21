@@ -1,7 +1,7 @@
 #include "game.hpp"
 #include "MidMischief.hpp"
 #include "Drawing.hpp"
-
+#include <iostream>
 
 SDL_Renderer* Drawing::gRenderer = NULL;
 SDL_Texture* Drawing::assets = NULL;
@@ -67,7 +67,7 @@ bool Game::loadMedia()
 	bool success = true;
 	
 	Drawing::assets = loadTexture("assets.png");
-    gTexture = loadTexture("background.png");
+    gTexture = loadTexture("background.jpg");
 	if(gTexture==NULL || Drawing::assets==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
@@ -123,7 +123,7 @@ void Game::run()
 	{
 	bool quit = false;
 	SDL_Event e;
-	MidMischief midnight; // game object, all game functions should be in MMM class
+	MidMischief midnight; // game object, all game functions should be in MidMischief class
 
 	while( !quit )
 	{
@@ -137,8 +137,13 @@ void Game::run()
 			}
 			if(e.type == SDL_KEYDOWN) 
 			{
-				midnight.movechars(e.key.keysym.sym, e.type);
+				midnight.movechars(e.key.keysym.sym);
 			}
+
+			// int xMouse, yMouse;
+			// SDL_GetMouseState(&xMouse,&yMouse);
+			// std::cout<<xMouse<<" "<<yMouse<<std::endl;
+		
 		}
 
 		SDL_RenderClear(Drawing::gRenderer); //removes everything from renderer
@@ -147,6 +152,7 @@ void Game::run()
 		//***********************draw the objects here********************
 
 		midnight.drawchars();
+		midnight.animatechars();
 
     	SDL_RenderPresent(Drawing::gRenderer); //displays the updated renderer
 

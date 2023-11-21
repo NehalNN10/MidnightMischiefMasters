@@ -10,15 +10,20 @@ void MidMischief::drawchars()
     two->draw();
 }
 
-void MidMischief::movechars(SDL_Keycode key, Uint32 eventType) 
+void MidMischief::movechars(SDL_Keycode key) 
 {
-    // if(eventType == SDL_KEYDOWN){ //if key is pressed only then movement is called.
-    if ( key == SDLK_w || key == SDLK_a || key == SDLK_s || key == SDLK_d ) 
-    {
+    // if ( key == SDLK_w || key == SDLK_a || key == SDLK_s || key == SDLK_d ) 
+    // {
         two->move(key);
-    }
-    else if ( key == SDLK_UP || key == SDLK_DOWN || key == SDLK_LEFT || key == SDLK_RIGHT )
-    {
+    // }
+    // else if ( key == SDLK_UP || key == SDLK_DOWN || key == SDLK_LEFT || key == SDLK_RIGHT )
+    // {
         one->move(key);
-    }
+    // }
+}
+
+void MidMischief::animatechars()
+{
+    one->animation();
+    two->animation();
 }
