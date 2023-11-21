@@ -3,7 +3,7 @@
 #include "fireboy.hpp"
 #include "watergirl.hpp"
 
-class MMM {
+class MidMischief {
 
     private:
         SDL_Window *gwindow;
@@ -11,10 +11,8 @@ class MMM {
         character *two = new watergirl();
 
     public:
-        MMM();
-        // void drawchars();
+        MidMischief();
         void drawchars();
-
         void movechars(SDL_Keycode key, Uint32 eventType);
 
 };

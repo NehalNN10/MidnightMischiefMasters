@@ -1,6 +1,7 @@
 #include "game.hpp"
-#include "MMM.hpp"
-#include "drawing.hpp"
+#include "MidMischief.hpp"
+#include "Drawing.hpp"
+
 
 SDL_Renderer* Drawing::gRenderer = NULL;
 SDL_Texture* Drawing::assets = NULL;
@@ -122,7 +123,7 @@ void Game::run()
 	{
 	bool quit = false;
 	SDL_Event e;
-	MMM midnight; // game object, all game functions should be in MMM class
+	MidMischief midnight; // game object, all game functions should be in MMM class
 
 	while( !quit )
 	{
@@ -134,13 +135,10 @@ void Game::run()
 			{
 				quit = true;
 			}
-			// if(e.type == SDL_KEYDOWN)
-				// a.draw(gRenderer, assets, e.key.keysym.sym, e.type); // drawing both objects and moving them, calling this here to make sure only move during keydown
-				// a->movechars(e.key.keysym.sym, e.type);
-				// a->one.move();
-				// a->two.move();
-				// a.one.move(e.key.keysym.sym);
-
+			if(e.type == SDL_KEYDOWN) 
+			{
+				midnight.movechars(e.key.keysym.sym, e.type);
+			}
 		}
 
 		SDL_RenderClear(Drawing::gRenderer); //removes everything from renderer
@@ -148,13 +146,7 @@ void Game::run()
 
 		//***********************draw the objects here********************
 
-
-		// drawObjects(gRenderer, assets);
-		// a.draw(gRenderer, assets, e.key.keysym.sym, e.type); // drawing both objects and moving them
-															//calling the function here as well to draw them initially
 		midnight.drawchars();
-		// a.one.draw();
-		//moveAlex(gRenderer, assets, )
 
     	SDL_RenderPresent(Drawing::gRenderer); //displays the updated renderer
 
