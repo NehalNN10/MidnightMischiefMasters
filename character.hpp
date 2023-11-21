@@ -12,7 +12,8 @@ protected:
     int y_jump = 10;
 public:
     // made everything public for now, should be private with their get set functions
-    SDL_Rect srcRect, moverRect;
+    SDL_Rect srcRect;
+    SDL_Rect moverRect;
 
     // character(SDL_Rect src, SDL_Rect mover);
     void draw(); // not working right now. 
