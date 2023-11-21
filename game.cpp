@@ -156,6 +156,8 @@ void Game::run()
 		midnight.drawchars();
 		// animates both characs
 		midnight.animatechars();
+		// check if collisions b/w characters
+		std::cout<<midnight.checkCollision();
 
     	SDL_RenderPresent(Drawing::gRenderer); //displays the updated renderer
 

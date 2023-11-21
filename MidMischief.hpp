@@ -16,5 +16,6 @@ class MidMischief {
         void drawchars();
         void animatechars();
         void movechars(SDL_Keycode key);
+        bool checkCollision();
 
 };
