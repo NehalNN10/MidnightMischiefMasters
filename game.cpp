@@ -137,6 +137,7 @@ void Game::run()
 			}
 			if(e.type == SDL_KEYDOWN) 
 			{
+				// moves both characters (but one at a time...)
 				midnight.movechars(e.key.keysym.sym);
 			}
 
@@ -150,8 +151,10 @@ void Game::run()
 		SDL_RenderCopy(Drawing::gRenderer, gTexture, NULL, NULL);//Draws background to renderer
 
 		//***********************draw the objects here********************
-
+		
+		// draws both characs
 		midnight.drawchars();
+		// animates both characs
 		midnight.animatechars();
 
     	SDL_RenderPresent(Drawing::gRenderer); //displays the updated renderer

@@ -7,6 +7,7 @@ class MidMischief {
 
     private:
         SDL_Window *gwindow;
+        // dynamically created for virual and polymorphic behaviour
         character *one = new fireboy();
         character *two = new watergirl();
 
