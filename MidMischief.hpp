@@ -10,6 +10,7 @@ class MidMischief {
         // dynamically created for virual and polymorphic behaviour
         character *one = new fireboy();
         character *two = new watergirl();
+        bool paused = false;
 
     public:
         MidMischief();

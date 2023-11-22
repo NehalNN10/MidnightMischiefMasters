@@ -28,4 +28,6 @@ public:
     void close();
     SDL_Texture* loadTexture( std::string path );
     void run();
+
+    bool welcomeScreen(); //? welcome screen for when game starts
 };

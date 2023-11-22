@@ -13,8 +13,8 @@ class character
         int frame;
         SDL_Rect* frames = new SDL_Rect[4];
 
-        int x_jump = 5;
-        int y_jump = 10;
+        int x_jump = 20; //set to 20 for testing purposes
+        int y_jump = 20; //set to 20 for testing purposes
 
     public:
         // source and mover rectangle

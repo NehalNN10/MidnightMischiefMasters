@@ -6,6 +6,8 @@
 SDL_Renderer* Drawing::gRenderer = NULL;
 SDL_Texture* Drawing::assets = NULL;
 
+static int screen = 0; //decides whether game runs or not
+
 bool Game::init()
 {
 	//Initialization flag
@@ -119,6 +121,20 @@ SDL_Texture* Game::loadTexture( std::string path )
 
 	return newTexture;
 }
+
+bool Game::welcomeScreen()
+{
+	// Loading success flag
+	bool success = true;
+	gTexture = loadTexture("starting_screen.jpeg");
+	if (gTexture == NULL)
+	{
+		printf("Unable to run due to error: %s\n", SDL_GetError());
+		success = false;
+	}
+	return success;
+}
+
 void Game::run()
 	{
 	bool quit = false;
@@ -135,12 +151,19 @@ void Game::run()
 			{
 				quit = true;
 			}
-			if(e.type == SDL_KEYDOWN) 
-			{
-				// moves both characters (but one at a time...)
-				midnight.movechars(e.key.keysym.sym);
-			}
-
+			if (e.type == SDL_KEYDOWN)
+				{
+				if (e.key.keysym.scancode == SDL_SCANCODE_RETURN && screen == 0)
+				{
+					screen = 1;
+					// need to work on startup screen
+				}
+				else
+				{
+					// moves both characters (but one at a time...)
+					midnight.movechars(e.key.keysym.sym);
+				}
+				}
 			// int xMouse, yMouse;
 			// SDL_GetMouseState(&xMouse,&yMouse);
 			// std::cout<<xMouse<<" "<<yMouse<<std::endl;
