@@ -10,16 +10,39 @@ void MidMischief::drawchars()
     two->draw();
 }
 
+
+//asynchronous movement achieved
 void MidMischief::movechars(SDL_Keycode key) 
 {
-    // if ( key == SDLK_w || key == SDLK_a || key == SDLK_s || key == SDLK_d ) 
-    // {
-        two->move(key);
-    // }
-    // else if ( key == SDLK_UP || key == SDLK_DOWN || key == SDLK_LEFT || key == SDLK_RIGHT )
-    // {
-        one->move(key);
-    // }
+    switch(key)
+    {
+        case SDLK_w:
+            direction_1 = 'U';
+            break;
+        case SDLK_s:
+            direction_1 = 'D';
+            break;
+        case SDLK_a:
+            direction_1 = 'L';
+            break;
+        case SDLK_d:
+            direction_1 = 'R';
+            break;
+        case SDLK_UP:
+            direction_2 = 'U';
+            break;
+        case SDLK_DOWN:
+            direction_2 = 'D';
+            break;
+        case SDLK_LEFT:
+            direction_2 = 'L';
+            break;
+        case SDLK_RIGHT:
+            direction_2 = 'R';
+            break;
+    }
+    two->move(direction_1); //passing in characters as they take less space than sdlkey objects 
+    one->move(direction_2);
 }
 
 void MidMischief::animatechars()

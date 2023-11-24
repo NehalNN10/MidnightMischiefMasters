@@ -17,22 +17,26 @@ watergirl::watergirl()
 }
 
 // movement of second character done using WASD
-void watergirl::move(SDL_Keycode key) {
-    if (key == SDLK_w)
+void watergirl::move(char direction) {
+    if (direction == 'U')
     {
-        if (moverRect.y-y_jump > 0) moverRect.y -= y_jump;
+        if (moverRect.y - y_jump > 0)
+            moverRect.y -= y_jump;
     }
-    else if (key == SDLK_s)
+    else if (direction == 'D')
     {
-        if (moverRect.y+y_jump < 550) moverRect.y += y_jump;
+        if (moverRect.y + y_jump < 550)
+            moverRect.y += y_jump;
     }
-    else if (key == SDLK_d)
+    else if (direction == 'R')
     {
-        if (moverRect.x+x_jump < 950) moverRect.x += x_jump;
+        if (moverRect.x + x_jump < 950)
+            moverRect.x += x_jump;
     }
-    else if (key == SDLK_a)
+    else if (direction == 'L')
     {
-        if (moverRect.x-x_jump > 0) moverRect.x -= x_jump;
+        if (moverRect.x - x_jump > 0)
+            moverRect.x -= x_jump;
     }
 }
 

@@ -22,5 +22,5 @@ class character
 
         void draw();
         void animation();
-        virtual void move(SDL_Keycode key) = 0; // pure virtual function
+        virtual void move(char direction) = 0; // pure virtual function
 };

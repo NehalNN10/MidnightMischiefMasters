@@ -8,6 +8,12 @@ SDL_Texture* Drawing::assets = NULL;
 
 static int screen = 0; //decides whether game runs or not
 
+/*
+0 = starting screen
+1 = playing screen
+2 = pause screen
+*/
+
 bool Game::init()
 {
 	//Initialization flag
@@ -63,13 +69,42 @@ bool Game::init()
 	return success;
 }
 
+bool Game::gameStart()
+{
+	// Loading success flag
+	bool success = true;
+	gTexture = loadTexture("background.jpg");
+	screen=1;
+	if (gTexture == NULL)
+	{
+		printf("Unable to run due to error: %s\n", SDL_GetError());
+		success = false;
+	}
+	return success;
+}
+
+bool Game::gamePause()
+{
+	// Loading success flag
+	bool success = true;
+	gTexture = loadTexture("pause_screen.jpg");
+	screen = 2;
+	if (gTexture == NULL)
+	{
+		printf("Unable to run due to error: %s\n", SDL_GetError());
+		success = false;
+	}
+	return success;
+}
+
 bool Game::loadMedia()
 {
 	//Loading success flag
 	bool success = true;
 	
 	Drawing::assets = loadTexture("assets.png");
-    gTexture = loadTexture("background.jpg");
+    // gTexture = loadTexture("background.jpg");
+	gTexture = loadTexture("starting_screen.jpeg");
 	if(gTexture==NULL || Drawing::assets==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
@@ -122,24 +157,12 @@ SDL_Texture* Game::loadTexture( std::string path )
 	return newTexture;
 }
 
-bool Game::welcomeScreen()
-{
-	// Loading success flag
-	bool success = true;
-	gTexture = loadTexture("starting_screen.jpeg");
-	if (gTexture == NULL)
-	{
-		printf("Unable to run due to error: %s\n", SDL_GetError());
-		success = false;
-	}
-	return success;
-}
-
 void Game::run()
 	{
 	bool quit = false;
 	SDL_Event e;
-	MidMischief midnight; // game object, all game functions should be in MidMischief class
+	MidMischief* midnight = new MidMischief(); // game object, all game functions should be in MidMischief class
+	// dynamic allocation
 
 	while( !quit )
 	{
@@ -155,19 +178,30 @@ void Game::run()
 				{
 				if (e.key.keysym.scancode == SDL_SCANCODE_RETURN && screen == 0)
 				{
-					screen = 1;
 					// need to work on startup screen
+					gameStart();
+				}
+				else if(e.key.keysym.scancode == SDL_SCANCODE_P) //Press p to pause and unpause
+				{
+					if (midnight->getpaused())
+					{
+						gamePause();
+					}
+					else
+					{
+						gameStart();
+					}
+					midnight->toggle_paused(); //pause if unpaused, and vice versa
 				}
 				else
 				{
-					// moves both characters (but one at a time...)
-					midnight.movechars(e.key.keysym.sym);
+					// moving our characters
+					midnight->movechars(e.key.keysym.sym);
 				}
 				}
 			// int xMouse, yMouse;
 			// SDL_GetMouseState(&xMouse,&yMouse);
 			// std::cout<<xMouse<<" "<<yMouse<<std::endl;
-		
 		}
 
 		SDL_RenderClear(Drawing::gRenderer); //removes everything from renderer
@@ -175,16 +209,21 @@ void Game::run()
 
 		//***********************draw the objects here********************
 		
-		// draws both characs
-		midnight.drawchars();
-		// animates both characs
-		midnight.animatechars();
-		// check if collisions b/w characters
-		std::cout<<midnight.checkCollision();
+		if (screen==1)
+		{
+			// draws both characs
+			midnight->drawchars();
+			// animates both characs
+			midnight->animatechars();
+			// check if collisions b/w characters
+			std::cout << midnight->checkCollision();
+		}
 
     	SDL_RenderPresent(Drawing::gRenderer); //displays the updated renderer
 
 	    SDL_Delay(100);	//causes sdl engine to delay for specified miliseconds
 	}
-	}
+	delete midnight;
+	midnight = nullptr;
+}
 			

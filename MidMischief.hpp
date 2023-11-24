@@ -11,6 +11,9 @@ class MidMischief {
         character *one = new fireboy();
         character *two = new watergirl();
         bool paused = false;
+        // handling multi-input movement
+        char direction_1;
+        char direction_2;
 
     public:
         MidMischief();
@@ -18,5 +21,7 @@ class MidMischief {
         void animatechars();
         void movechars(SDL_Keycode key);
         bool checkCollision();
+        bool getpaused(){ return paused; };
+        void toggle_paused(){ paused = !paused; }
 
 };
