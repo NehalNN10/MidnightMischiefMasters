@@ -10,7 +10,7 @@ class MidMischief {
         // dynamically created for virual and polymorphic behaviour
         character *one = new fireboy();
         character *two = new watergirl();
-        bool paused = false;
+        // bool paused;
         // handling multi-input movement
         char direction_1;
         char direction_2;
@@ -19,9 +19,10 @@ class MidMischief {
         MidMischief();
         void drawchars();
         void animatechars();
-        void movechars(SDL_Keycode key);
+        bool paused = false;
+        void movechars(const Uint8* keystates);
         bool checkCollision();
-        bool getpaused(){ return paused; };
-        void toggle_paused(){ paused = !paused; }
+        bool getpaused();
+        void toggle_paused(bool p);
 
 };

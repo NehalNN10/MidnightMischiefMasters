@@ -163,6 +163,7 @@ void Game::run()
 	SDL_Event e;
 	MidMischief* midnight = new MidMischief(); // game object, all game functions should be in MidMischief class
 	// dynamic allocation
+	midnight->toggle_paused(false);
 
 	while( !quit )
 	{
@@ -174,34 +175,35 @@ void Game::run()
 			{
 				quit = true;
 			}
-			if (e.type == SDL_KEYDOWN)
+			const Uint8 *currentKeyStates = SDL_GetKeyboardState(nullptr);
+
+			if (currentKeyStates[SDL_SCANCODE_RETURN] && screen == 0)
+			{
+				// Handle game start
+				gameStart();
+			}
+
+			// to pause and unpause the screen
+			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p)
+			{
+				if (midnight->paused == false)
 				{
-				if (e.key.keysym.scancode == SDL_SCANCODE_RETURN && screen == 0)
+					midnight->paused = true;
+					gamePause();
+				}
+				else if (midnight->paused == true)
 				{
-					// need to work on startup screen
+					midnight->paused = false;
 					gameStart();
 				}
-				else if(e.key.keysym.scancode == SDL_SCANCODE_P) //Press p to pause and unpause
-				{
-					if (midnight->getpaused())
-					{
-						gamePause();
-					}
-					else
-					{
-						gameStart();
-					}
-					midnight->toggle_paused(); //pause if unpaused, and vice versa
-				}
-				else
-				{
-					// moving our characters
-					midnight->movechars(e.key.keysym.sym);
-				}
-				}
-			// int xMouse, yMouse;
-			// SDL_GetMouseState(&xMouse,&yMouse);
-			// std::cout<<xMouse<<" "<<yMouse<<std::endl;
+			}
+
+			// Handle movement
+			if (!midnight->getpaused())
+			{
+				// Call your function to handle character movement
+				midnight->movechars(currentKeyStates);
+			}
 		}
 
 		SDL_RenderClear(Drawing::gRenderer); //removes everything from renderer

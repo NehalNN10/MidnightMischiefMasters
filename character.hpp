@@ -22,5 +22,5 @@ class character
 
         void draw();
         void animation();
-        virtual void move(char direction) = 0; // pure virtual function
+        void move(char direction);
 };
