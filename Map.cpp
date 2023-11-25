@@ -16,9 +16,9 @@ Map::Map(){
             }
         }
 
-        // Connect nodes vertically (example: connect every other node in the y direction)
-        for (int i = 0; i < NUM_BLOCKS_X; ++i) {
-            for (int j = 0; j < NUM_BLOCKS_Y - 1; j += 2) {
+        // Connect nodes vertically 
+        for (int i = 0; i < NUM_BLOCKS_X; i+=3) {
+            for (int j = 0; j < NUM_BLOCKS_Y - 1; ++j) {
                 nodes[i][j].connectedNodes.push_back(i * NUM_BLOCKS_Y + (j + 1));
                 nodes[i][j + 1].connectedNodes.push_back(i * NUM_BLOCKS_Y + j);
             }

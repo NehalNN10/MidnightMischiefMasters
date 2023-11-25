@@ -21,18 +21,21 @@ void fireboy::move(SDL_Keycode key)
     if (key == SDLK_UP)
     {
         if (moverRect.y-y_jump > 0 && fireboy::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y-y_jump, graph)) 
-        moverRect.y -= y_jump;
+            moverRect.y -= y_jump;
     }
     else if (key == SDLK_DOWN)
     {
-        if (moverRect.y+y_jump < 550) moverRect.y += y_jump;
+        if (moverRect.y+y_jump < 550 && fireboy::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y+y_jump, graph)) 
+            moverRect.y += y_jump;
     }
     else if (key == SDLK_RIGHT)
     {
-        if (moverRect.x+x_jump < 950) moverRect.x += x_jump;
+        if (moverRect.x+x_jump < 950 && fireboy::isMoveValid(moverRect.x, moverRect.y, moverRect.x+x_jump, moverRect.y, graph)) 
+            moverRect.x += x_jump;
     }
     else if (key == SDLK_LEFT)
     {
-        if (moverRect.x-x_jump > 0) moverRect.x -= x_jump;
+        if (moverRect.x-x_jump > 0 && fireboy::isMoveValid(moverRect.x, moverRect.y, moverRect.x-x_jump, moverRect.y, graph)) 
+            moverRect.x -= x_jump;
     }
 }
