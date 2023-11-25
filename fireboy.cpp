@@ -20,7 +20,8 @@ void fireboy::move(SDL_Keycode key)
 {
     if (key == SDLK_UP)
     {
-        if (moverRect.y-y_jump > 0) moverRect.y -= y_jump;
+        if (moverRect.y-y_jump > 0 && fireboy::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y-y_jump, graph)) 
+        moverRect.y -= y_jump;
     }
     else if (key == SDLK_DOWN)
     {
