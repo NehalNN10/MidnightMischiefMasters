@@ -22,5 +22,5 @@ paper1::paper1(){
 
     srcRect = frames[0];
     // default co-ords to spawn character
-    moverRect = {50, 50, 50, 50};
+    moverRect = {200, 400, 50, 50};
 }
