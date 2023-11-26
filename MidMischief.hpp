@@ -2,6 +2,8 @@
 #include "character.hpp"
 #include "fireboy.hpp"
 #include "watergirl.hpp"
+#include "collectibles.hpp"
+#include "paper1.hpp"
 
 class MidMischief {
 
@@ -10,6 +12,7 @@ class MidMischief {
         // dynamically created for virual and polymorphic behaviour
         character *one = new fireboy();
         character *two = new watergirl();
+        collectibles *first = new paper1();
 
     public:
         MidMischief();

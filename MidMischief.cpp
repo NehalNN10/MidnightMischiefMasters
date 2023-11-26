@@ -8,6 +8,7 @@ void MidMischief::drawchars()
 {
     one->draw();
     two->draw();
+    first->draw();
 }
 
 void MidMischief::movechars(SDL_Keycode key) 
@@ -26,6 +27,7 @@ void MidMischief::animatechars()
 {
     one->animation();
     two->animation();
+    first->animation();
 }
 // for now checks if characters are colliding, need to convert and add collectables
 bool MidMischief::checkCollision()

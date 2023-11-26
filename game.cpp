@@ -5,6 +5,7 @@
 
 SDL_Renderer* Drawing::gRenderer = NULL;
 SDL_Texture* Drawing::assets = NULL;
+SDL_Texture* Drawing::collect = NULL;
 
 bool Game::init()
 {
@@ -67,8 +68,9 @@ bool Game::loadMedia()
 	bool success = true;
 	
 	Drawing::assets = loadTexture("assets.png");
+	Drawing::collect = loadTexture("collect.png");
     gTexture = loadTexture("background.jpg");
-	if(gTexture==NULL || Drawing::assets==NULL)
+	if(gTexture==NULL || Drawing::assets==NULL || Drawing::collect==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
         success =false;
@@ -81,6 +83,10 @@ void Game::close()
 	//Free loaded images
 	SDL_DestroyTexture(Drawing::assets);
 	Drawing::assets=NULL;
+
+	SDL_DestroyTexture(Drawing::collect);
+	Drawing::collect=NULL;
+
 	SDL_DestroyTexture(gTexture);
 	
 	//Destroy window
