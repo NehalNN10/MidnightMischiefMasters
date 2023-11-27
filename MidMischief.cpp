@@ -4,6 +4,9 @@
 
 MidMischief::MidMischief() {}
 
+bool MidMischief::getpaused() { return paused; };
+void MidMischief::toggle_paused(bool p) { paused = p; }
+
 void MidMischief::drawchars()
 {
     one->draw();
@@ -11,16 +14,49 @@ void MidMischief::drawchars()
     first->draw();
 }
 
-void MidMischief::movechars(SDL_Keycode key) 
+
+//asynchronous movement achieved
+void MidMischief::movechars(const Uint8* keystates) 
 {
-    // if ( key == SDLK_w || key == SDLK_a || key == SDLK_s || key == SDLK_d ) 
-    // {
-        two->move(key);
-    // }
-    // else if ( key == SDLK_UP || key == SDLK_DOWN || key == SDLK_LEFT || key == SDLK_RIGHT )
-    // {
-        one->move(key);
-    // }
+    // Movement keys for character 1
+    if (keystates[SDL_SCANCODE_W])
+    {
+        direction_1 = 'U';
+    }
+    else if (keystates[SDL_SCANCODE_S])
+    {
+        direction_1 = 'D';
+    }
+    else if (keystates[SDL_SCANCODE_A])
+    {
+        direction_1 = 'L';
+    }
+    else if (keystates[SDL_SCANCODE_D])
+    {
+        direction_1 = 'R';
+    }
+
+    // Movement keys for character 2
+    if (keystates[SDL_SCANCODE_UP])
+    {
+        direction_2 = 'U';
+    }
+    else if (keystates[SDL_SCANCODE_DOWN])
+    {
+        direction_2 = 'D';
+    }
+    else if (keystates[SDL_SCANCODE_LEFT])
+    {
+        direction_2 = 'L';
+    }
+    else if (keystates[SDL_SCANCODE_RIGHT])
+    {
+        direction_2 = 'R';
+    }
+    two->move(direction_1); //passing in characters as they take less space than sdlkey objects 
+    one->move(direction_2);
+    direction_1 = ' ';
+    direction_2 = ' ';
 }
 
 void MidMischief::animatechars()
