@@ -2,6 +2,8 @@
 #include "character.hpp"
 #include "fireboy.hpp"
 #include "watergirl.hpp"
+#include "collectibles.hpp"
+#include "paper1.hpp"
 
 class MidMischief {
 
@@ -10,19 +12,13 @@ class MidMischief {
         // dynamically created for virual and polymorphic behaviour
         character *one = new fireboy();
         character *two = new watergirl();
-        // bool paused;
-        // handling multi-input movement
-        char direction_1;
-        char direction_2;
+        collectibles *first = new paper1();
 
     public:
         MidMischief();
         void drawchars();
         void animatechars();
-        bool paused = false;
-        void movechars(const Uint8* keystates);
+        void movechars(SDL_Keycode key);
         bool checkCollision();
-        bool getpaused();
-        void toggle_paused(bool p);
 
 };

@@ -21,14 +21,12 @@ class Game{
     SDL_Texture* gTexture = NULL;
     //global reference to png image sheets
     SDL_Texture* assets=NULL;
-
+    SDL_Texture* collect=NULL;
+    
 public:
     bool init();
     bool loadMedia();
     void close();
     SDL_Texture* loadTexture( std::string path );
     void run();
-
-    bool gameStart();
-    bool gamePause();
 };

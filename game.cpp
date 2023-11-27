@@ -5,14 +5,7 @@
 
 SDL_Renderer* Drawing::gRenderer = NULL;
 SDL_Texture* Drawing::assets = NULL;
-
-static int screen = 0; //decides whether game runs or not
-
-/*
-0 = starting screen
-1 = playing screen
-2 = pause screen
-*/
+SDL_Texture* Drawing::collect = NULL;
 
 bool Game::init()
 {
@@ -69,43 +62,15 @@ bool Game::init()
 	return success;
 }
 
-bool Game::gameStart()
-{
-	// Loading success flag
-	bool success = true;
-	gTexture = loadTexture("background.jpg");
-	screen=1;
-	if (gTexture == NULL)
-	{
-		printf("Unable to run due to error: %s\n", SDL_GetError());
-		success = false;
-	}
-	return success;
-}
-
-bool Game::gamePause()
-{
-	// Loading success flag
-	bool success = true;
-	gTexture = loadTexture("pause_screen.jpg");
-	screen = 2;
-	if (gTexture == NULL)
-	{
-		printf("Unable to run due to error: %s\n", SDL_GetError());
-		success = false;
-	}
-	return success;
-}
-
 bool Game::loadMedia()
 {
 	//Loading success flag
 	bool success = true;
 	
 	Drawing::assets = loadTexture("assets.png");
-    // gTexture = loadTexture("background.jpg");
-	gTexture = loadTexture("starting_screen.jpeg");
-	if(gTexture==NULL || Drawing::assets==NULL)
+	Drawing::collect = loadTexture("collect.png");
+    gTexture = loadTexture("background.jpg");
+	if(gTexture==NULL || Drawing::assets==NULL || Drawing::collect==NULL)
     {
         printf("Unable to run due to error: %s\n",SDL_GetError());
         success =false;
@@ -118,6 +83,10 @@ void Game::close()
 	//Free loaded images
 	SDL_DestroyTexture(Drawing::assets);
 	Drawing::assets=NULL;
+
+	SDL_DestroyTexture(Drawing::collect);
+	Drawing::collect=NULL;
+
 	SDL_DestroyTexture(gTexture);
 	
 	//Destroy window
@@ -156,14 +125,11 @@ SDL_Texture* Game::loadTexture( std::string path )
 
 	return newTexture;
 }
-
 void Game::run()
 	{
 	bool quit = false;
 	SDL_Event e;
-	MidMischief* midnight = new MidMischief(); // game object, all game functions should be in MidMischief class
-	// dynamic allocation
-	midnight->toggle_paused(false);
+	MidMischief midnight; // game object, all game functions should be in MidMischief class
 
 	while( !quit )
 	{
@@ -175,35 +141,16 @@ void Game::run()
 			{
 				quit = true;
 			}
-			const Uint8 *currentKeyStates = SDL_GetKeyboardState(nullptr);
-
-			if (currentKeyStates[SDL_SCANCODE_RETURN] && screen == 0)
+			if(e.type == SDL_KEYDOWN) 
 			{
-				// Handle game start
-				gameStart();
+				// moves both characters (but one at a time...)
+				midnight.movechars(e.key.keysym.sym);
 			}
 
-			// to pause and unpause the screen
-			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p)
-			{
-				if (midnight->paused == false)
-				{
-					midnight->paused = true;
-					gamePause();
-				}
-				else if (midnight->paused == true)
-				{
-					midnight->paused = false;
-					gameStart();
-				}
-			}
-
-			// Handle movement
-			if (!midnight->getpaused())
-			{
-				// Call your function to handle character movement
-				midnight->movechars(currentKeyStates);
-			}
+			// int xMouse, yMouse;
+			// SDL_GetMouseState(&xMouse,&yMouse);
+			// std::cout<<xMouse<<" "<<yMouse<<std::endl;
+		
 		}
 
 		SDL_RenderClear(Drawing::gRenderer); //removes everything from renderer
@@ -211,21 +158,16 @@ void Game::run()
 
 		//***********************draw the objects here********************
 		
-		if (screen==1)
-		{
-			// draws both characs
-			midnight->drawchars();
-			// animates both characs
-			midnight->animatechars();
-			// check if collisions b/w characters
-			std::cout << midnight->checkCollision();
-		}
+		// draws both characs
+		midnight.drawchars();
+		// animates both characs
+		midnight.animatechars();
+		// check if collisions b/w characters
+		std::cout<<midnight.checkCollision();
 
     	SDL_RenderPresent(Drawing::gRenderer); //displays the updated renderer
 
 	    SDL_Delay(100);	//causes sdl engine to delay for specified miliseconds
 	}
-	delete midnight;
-	midnight = nullptr;
-}
+	}
 			

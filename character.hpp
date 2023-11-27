@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include "position.hpp"
 #include "speed.hpp"
+#include "Map.hpp"
 
 class character 
 {
@@ -13,14 +14,16 @@ class character
         int frame;
         SDL_Rect* frames = new SDL_Rect[4];
 
-        int x_jump = 20; //set to 20 for testing purposes
-        int y_jump = 20; //set to 20 for testing purposes
+        int x_jump = 20;
+        int y_jump = 20;
 
     public:
         // source and mover rectangle
         SDL_Rect srcRect, moverRect;
+        Map graph;
 
         void draw();
         void animation();
-        void move(char direction);
+        bool isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const Map& map);
+        virtual void move(SDL_Keycode key) = 0; // pure virtual function
 };
