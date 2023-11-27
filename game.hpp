@@ -29,4 +29,6 @@ public:
     void close();
     SDL_Texture* loadTexture( std::string path );
     void run();
+    bool gameStart();
+    bool gamePause();
 };

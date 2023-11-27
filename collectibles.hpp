@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+#include "drawing.hpp"
 
 class collectibles{
     protected:

@@ -13,12 +13,16 @@ class MidMischief {
         character *one = new fireboy();
         character *two = new watergirl();
         collectibles *first = new paper1();
+        char direction_1;
+        char direction_2;
+        bool paused;
 
     public:
         MidMischief();
         void drawchars();
         void animatechars();
-        void movechars(SDL_Keycode key);
+        void movechars(const Uint8* keystates);
         bool checkCollision();
-
+        bool getpaused();
+        void toggle_paused(bool p);
 };

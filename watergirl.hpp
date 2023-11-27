@@ -4,5 +4,4 @@
 class watergirl : public character {
     public:
         watergirl();
-        // void move(char direction);
 };

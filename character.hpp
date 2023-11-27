@@ -25,5 +25,5 @@ class character
         void draw();
         void animation();
         bool isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const Map& map);
-        virtual void move(SDL_Keycode key) = 0; // pure virtual function
+        void move(char direction);
 };
