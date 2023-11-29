@@ -1,6 +1,7 @@
 #include "MidMischief.hpp"
 #include "drawing.hpp"
 #include "iostream"
+#include <bits/stdc++.h>
 
 MidMischief::MidMischief() {
     score = 0;
@@ -8,6 +9,12 @@ MidMischief::MidMischief() {
     two = new watergirl();
     // first = new paper1();
     collectibles_list.push_back(new paper1({200,400,50,50}));
+    /*
+    for (int i = 0; i < 5; i++)
+    {
+        collectibles_list.push_back(new paper1({rand() % 1000, rand() % 600, 50, 50}));
+    }
+    */
 }
 
 bool MidMischief::getpaused() { return paused; };
@@ -85,13 +92,19 @@ void MidMischief::allCollisions()
     for (auto & element : collectibles_list)
     {
     if (collisionChecker::collisionCheck(element->moverRect,two->moverRect) && element->collected == false){
-    score ++;
-    element->collected = true;
+        score ++;
+        element->collected = true;
     }
     if (collisionChecker::collisionCheck(element->moverRect,one->moverRect) && element->collected == false){
         score ++;
         element->collected = true;
     }
-    std::cout<<"Score" << score << std::endl;
+    // deleting collectible after it has been collected
+    if (element->collected)
+    {
+        auto it = std::find(collectibles_list.begin(), collectibles_list.end(), element);
+        collectibles_list.erase(it);
+    }
+    // std::cout<<"Score" << score << std::endl;
     }
 }
