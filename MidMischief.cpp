@@ -2,7 +2,13 @@
 #include "drawing.hpp"
 #include "iostream"
 
-MidMischief::MidMischief() {}
+MidMischief::MidMischief() {
+    score = 0;
+    one = new fireboy();
+    two = new watergirl();
+    // first = new paper1();
+    collectibles_list.push_back(new paper1({200,400,50,50}));
+}
 
 bool MidMischief::getpaused() { return paused; };
 void MidMischief::toggle_paused(bool p) { paused = p; }
@@ -11,7 +17,11 @@ void MidMischief::drawchars()
 {
     one->draw();
     two->draw();
-    first->draw();
+    for (auto & element : collectibles_list)
+    {
+        element->draw();
+    }
+    // first->draw();
 }
 
 
@@ -63,56 +73,25 @@ void MidMischief::animatechars()
 {
     one->animation();
     two->animation();
-    first->animation();
+    // first->animation();
+    for (auto & element : collectibles_list)
+    {
+        element->animation();
+    }
 }
-// for now checks if characters are colliding, need to convert and add collectables
-bool MidMischief::checkCollision()
-{
-    //The sides of the rectangles
-    int leftA, leftB, leftP1;
-    int rightA, rightB, rightP1;
-    int topA, topB, topP1;
-    int bottomA, bottomB, bottomP1;
 
-    //Calculate the sides of rect A
-    leftA = one->moverRect.x;
-    rightA = one->moverRect.x + one->moverRect.w;
-    topA = one->moverRect.y;
-    bottomA = one->moverRect.y + one->moverRect.h;
-
-    //Calculate the sides of rect B
-    leftB = two->moverRect.x;
-    rightB = two->moverRect.x + two->moverRect.w;
-    topB = two->moverRect.y;
-    bottomB = two->moverRect.y + two->moverRect.h;
-
-    //Calculate the sides for collecteble item
-
-    leftP1 = first->moverRect.x;
-    rightP1 = first->moverRect.x + first->moverRect.w;
-    topP1 = first->moverRect.y;
-    bottomP1 = first->moverRect.y + first->moverRect.h;
-
-    if( bottomA <= topP1 && bottomB <= topP1 )
+void MidMischief::allCollisions()
+{   
+    for (auto & element : collectibles_list)
     {
-        return false;
+    if (collisionChecker::collisionCheck(element->moverRect,two->moverRect) && element->collected == false){
+    score ++;
+    element->collected = true;
     }
-
-    if( topA >= bottomP1 && topB >= bottomP1 )
-    {
-        return false;
+    if (collisionChecker::collisionCheck(element->moverRect,one->moverRect) && element->collected == false){
+        score ++;
+        element->collected = true;
     }
-
-    if( rightA <= leftP1 && rightB <= leftP1 )
-    {
-        return false;
+    std::cout<<"Score" << score << std::endl;
     }
-
-    if( leftA >= rightP1 && leftB >= rightP1 )
-    {
-        return false;
-    }
-
-    //If none of the sides from A are outside B
-    return true;
 }

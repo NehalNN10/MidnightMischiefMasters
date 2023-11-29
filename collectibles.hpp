@@ -11,7 +11,9 @@ class collectibles{
     public:
         // source and mover rectangle
         SDL_Rect srcRect, moverRect;
+        bool collected;
 
+        collectibles();
         void draw();
         void animation();
     

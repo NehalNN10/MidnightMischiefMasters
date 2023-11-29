@@ -1,7 +1,7 @@
 #include <iostream>
 #include "paper1.hpp"
 
-paper1::paper1(){
+paper1::paper1(SDL_Rect mr){
     frame = 0;
     // 15 different animation types
     frames[0] = {34, 130, 124, 49};
@@ -22,5 +22,5 @@ paper1::paper1(){
 
     srcRect = frames[0];
     // default co-ords to spawn character
-    moverRect = {200, 400, 50, 50};
+    moverRect = mr;
 }

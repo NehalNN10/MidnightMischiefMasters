@@ -2,6 +2,12 @@
 #include "collectibles.hpp"
 #include "drawing.hpp"
 
+
+collectibles::collectibles() 
+{
+    collected = false;
+}
+
 void collectibles::draw() 
 {
     SDL_RenderCopy(Drawing::gRenderer, Drawing::collect, &srcRect, &moverRect);

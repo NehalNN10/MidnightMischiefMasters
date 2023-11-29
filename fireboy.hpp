@@ -4,5 +4,4 @@
 class fireboy : public character {
     public:
         fireboy();
-        // void move(char direction);
 };

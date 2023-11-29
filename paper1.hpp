@@ -3,5 +3,5 @@
 
 class paper1 : public collectibles{
     public:
-        paper1();
+        paper1(SDL_Rect mr);
 };

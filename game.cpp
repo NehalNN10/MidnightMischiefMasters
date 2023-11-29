@@ -7,7 +7,6 @@ SDL_Renderer *Drawing::gRenderer = NULL;
 SDL_Texture *Drawing::assets = NULL;
 SDL_Texture *Drawing::collect = NULL;
 
-
 static int screen = 0; // decides whether game runs or not
 
 /*
@@ -222,7 +221,8 @@ void Game::run()
 			// animates both characs
 			midnight->animatechars();
 			// check if collisions b/w characters
-			std::cout << midnight->checkCollision();
+			// std::cout << midnight->checkCollision();
+			midnight -> allCollisions();
 		}
 
 		SDL_RenderPresent(Drawing::gRenderer); // displays the updated renderer
