@@ -13,6 +13,7 @@ static int screen = 0; // decides whether game runs or not
 0 = starting screen
 1 = playing screen
 2 = pause screen
+3 = controls
 */
 
 bool Game::init()
@@ -97,15 +98,29 @@ bool Game::gamePause()
 	return success;
 }
 
+bool Game::controls()
+{
+	bool success = true;
+	gTexture = loadTexture("controls.png");
+	screen = 3;
+	if (gTexture == NULL)
+	{
+		printf("Unable to run due to error: %s\n", SDL_GetError());
+		success = false;
+	}
+	return success;
+}
+
+
 bool Game::loadMedia()
 {
 	// Loading success flag
 	bool success = true;
-
+	screen = 0;
 	Drawing::assets = loadTexture("assets.png");
 	Drawing::collect = loadTexture("collect.png");
 	// gTexture = loadTexture("background.jpg");
-	gTexture = loadTexture("starting_screen.jpeg");
+	gTexture = loadTexture("Midnight mischief masters.png");
 	if (gTexture == NULL || Drawing::assets == NULL || Drawing::collect == NULL)
 	{
 		printf("Unable to run due to error: %s\n", SDL_GetError());
@@ -180,10 +195,25 @@ void Game::run()
 			}
 			const Uint8 *currentKeyStates = SDL_GetKeyboardState(nullptr);
 
-			if (currentKeyStates[SDL_SCANCODE_RETURN] && screen == 0)
+			// to click play, rules, quit, hard screen, medium screen, easy screen
+			if (e.type == SDL_MOUSEBUTTONDOWN)
 			{
-				// Handle game start
-				gameStart();
+				int xMouse, yMouse;
+				SDL_GetMouseState(&xMouse, &yMouse);
+				std::cout << "X: " << xMouse << ", Y: " << yMouse << std::endl;
+				if (xMouse > 432 && xMouse < 584 && yMouse > 343 && yMouse < 370 && screen == 0)
+				{
+					gameStart();
+				}
+				else if (xMouse > 384 && xMouse < 632 && yMouse > 415 && yMouse < 446 && screen == 0)
+				{
+					controls();
+				}
+			}
+
+			if (e.type == SDL_KEYDOWN && screen==3 && e.key.keysym.sym == SDLK_ESCAPE)
+			{
+				loadMedia();
 			}
 
 			// to pause and unpause the screen

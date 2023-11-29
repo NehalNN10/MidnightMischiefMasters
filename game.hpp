@@ -32,4 +32,5 @@ public:
     
     bool gameStart();
     bool gamePause();
+    bool controls();
 };
