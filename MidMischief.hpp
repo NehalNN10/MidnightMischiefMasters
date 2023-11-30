@@ -1,12 +1,15 @@
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include "character.hpp"
 #include "fireboy.hpp"
 #include "watergirl.hpp"
 #include "collectibles.hpp"
 #include "collisionCheck.hpp"
+// #include "score.hpp"
 #include "paper1.hpp"
 #include "vector"
 #include <iostream>
+#include <string>
 
 class MidMischief {
 
@@ -30,4 +33,6 @@ class MidMischief {
         bool getpaused();
         void toggle_paused(bool p);
         void allCollisions();
+        void show_score();
+        void text_score();
 };

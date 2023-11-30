@@ -253,6 +253,8 @@ void Game::run()
 			// check if collisions b/w characters
 			// std::cout << midnight->checkCollision();
 			midnight -> allCollisions();
+			midnight->text_score();
+			midnight->show_score();
 		}
 
 		SDL_RenderPresent(Drawing::gRenderer); // displays the updated renderer

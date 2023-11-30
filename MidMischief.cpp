@@ -9,9 +9,10 @@ MidMischief::MidMischief() {
     two = new watergirl();
     // first = new paper1();
     // collectibles_list.push_back(new paper1({200,400,50,50}));
+    //? drawing random collectibles for testing purposes
     for (int i = 0; i < 5; i++)
     {
-        collectibles_list.push_back(new paper1({rand() % 1000, 400, 50, 50}));
+        collectibles_list.push_back(new paper1({rand() % 1000-50, rand() % 400-50, 50, 50}));
     }
 }
 
@@ -90,11 +91,11 @@ void MidMischief::allCollisions()
     for (auto & element : collectibles_list)
     {
     if (collisionChecker::collisionCheck(element->moverRect,two->moverRect) && element->collected == false){
-        score ++;
+        score++;
         element->collected = true;
     }
     if (collisionChecker::collisionCheck(element->moverRect,one->moverRect) && element->collected == false){
-        score ++;
+        score++;
         element->collected = true;
     }
     // deleting collectible after it has been collected
@@ -103,6 +104,39 @@ void MidMischief::allCollisions()
         auto it = std::find(collectibles_list.begin(), collectibles_list.end(), element);
         collectibles_list.erase(it);
     }
-    std::cout<<"Score" << score << std::endl;
+    // std::cout<<"Score" << score << std::endl;
     }
+}
+
+void MidMischief::show_score(){
+    // SDL_Init();
+    TTF_Init();                                                                              // Initializes SDL_TTF for displaying text in
+    TTF_Font *font = TTF_OpenFont("arial.ttf", 24);                                          // Opens a font style that can be downloaded as a .ttf file and sets a font size
+    SDL_Color color = {0, 0, 0};                                                             // This is the texts color that can be changed using RGB values from 0 to 255.
+    std::string tmp = std::to_string(score);                                                           // converts score to string that can later be displayed using the font file - hence why we needed font.
+    SDL_Surface *surfacemessage = TTF_RenderText_Solid(font, tmp.c_str(), color);            // A surface is created using functions from SDL library that displays the score on the screen.
+    SDL_Texture *Message = SDL_CreateTextureFromSurface(Drawing::gRenderer, surfacemessage); // Converts into texture that can be displayed
+    SDL_Rect Message_rect = {944, 12, 50, 30};                                               // create a rect for it
+    SDL_RenderCopy(Drawing::gRenderer, Message, NULL, &Message_rect);
+    SDL_FreeSurface(surfacemessage);
+    SDL_DestroyTexture(Message);
+    TTF_CloseFont(font);
+    TTF_Quit();
+}
+
+void MidMischief::text_score()
+{
+    // SDL_Init();
+    TTF_Init();                                                                              // Initializes SDL_TTF for displaying text in
+    TTF_Font *font = TTF_OpenFont("arial.ttf", 24);                                          // Opens a font style that can be downloaded as a .ttf file and sets a font size
+    SDL_Color color = {0, 0, 0};                                                             // This is the texts color that can be changed using RGB values from 0 to 255.
+    std::string tmp = "Pappars collected : ";                                                                 // converts score to string that can later be displayed using the font file - hence why we needed font.
+    SDL_Surface *surfacemessage = TTF_RenderText_Solid(font, tmp.c_str(), color);            // A surface is created using functions from SDL library that displays the score on the screen.
+    SDL_Texture *Message = SDL_CreateTextureFromSurface(Drawing::gRenderer, surfacemessage); // Converts into texture that can be displayed
+    SDL_Rect Message_rect = {774, 12, 130, 30};                                                // create a rect for it
+    SDL_RenderCopy(Drawing::gRenderer, Message, NULL, &Message_rect);
+    SDL_FreeSurface(surfacemessage);
+    SDL_DestroyTexture(Message);
+    TTF_CloseFont(font);
+    TTF_Quit();
 }
