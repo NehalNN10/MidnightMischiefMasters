@@ -8,13 +8,11 @@ MidMischief::MidMischief() {
     one = new fireboy();
     two = new watergirl();
     // first = new paper1();
-    collectibles_list.push_back(new paper1({200,400,50,50}));
-    /*
+    // collectibles_list.push_back(new paper1({200,400,50,50}));
     for (int i = 0; i < 5; i++)
     {
-        collectibles_list.push_back(new paper1({rand() % 1000, rand() % 600, 50, 50}));
+        collectibles_list.push_back(new paper1({rand() % 1000, 400, 50, 50}));
     }
-    */
 }
 
 bool MidMischief::getpaused() { return paused; };
@@ -105,6 +103,6 @@ void MidMischief::allCollisions()
         auto it = std::find(collectibles_list.begin(), collectibles_list.end(), element);
         collectibles_list.erase(it);
     }
-    // std::cout<<"Score" << score << std::endl;
+    std::cout<<"Score" << score << std::endl;
     }
 }
