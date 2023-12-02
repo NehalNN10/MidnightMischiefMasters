@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
+#include <SDL_mixer.h> //for playing game music
 #include <time.h>
 
 class Game{
@@ -22,7 +23,10 @@ class Game{
     //global reference to png image sheets
     SDL_Texture* assets=NULL;
     SDL_Texture* collect=NULL;
-    
+
+    //for game music
+    Mix_Music *gMusic = NULL;
+
 public:
     bool init();
     bool loadMedia();

@@ -63,6 +63,14 @@ bool Game::init()
 					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
 					success = false;
 				}
+
+				// initialising mixer
+				// if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+				if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+				{
+					printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+					success = false;
+				}
 			}
 		}
 	}
@@ -126,6 +134,14 @@ bool Game::loadMedia()
 		printf("Unable to run due to error: %s\n", SDL_GetError());
 		success = false;
 	}
+	// playing background music
+	gMusic = Mix_LoadMUS("bgmusic.mp3");
+	if (gMusic == NULL)
+	{
+		printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+		success = false;
+	}
+	std::cout << "Music being played tho" << std::endl;
 	return success;
 }
 
@@ -146,6 +162,22 @@ void Game::close()
 	// Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
+	// handle music player
+	// Stop playing the music if it's playing
+	if (Mix_PlayingMusic())
+	{
+		Mix_HaltMusic();
+	}
+
+	// Free the music object
+	if (gMusic != NULL)
+	{
+		Mix_FreeMusic(gMusic);
+		gMusic = NULL;
+	}
+
+	// Quit SDL Mixer
+	Mix_Quit();
 }
 
 SDL_Texture *Game::loadTexture(std::string path)
@@ -236,6 +268,15 @@ void Game::run()
 			{
 				// Call your function to handle character movement
 				midnight->movechars(currentKeyStates);
+			}
+			if (Mix_PlayingMusic()==0 && (screen==0 || screen == 3)) //playing music here
+			{
+				Mix_PlayMusic(gMusic, -1);
+			}
+			else
+			{
+				if (Mix_PlayingMusic() && screen != 0 && screen != 3)
+					Mix_HaltMusic();
 			}
 		}
 
