@@ -75,6 +75,24 @@ void MidMischief::movechars(const Uint8* keystates)
     direction_2 = ' ';
 }
 
+void MidMischief::apply_gravity() 
+{
+    one->gravity += 1; // moon gravity
+    one->moverRect.y += one->gravity;
+    if (one->moverRect.y >= 400) 
+    {
+        one->moverRect.y = 400;
+    }
+
+    two->gravity += 3; // earth gravity
+    two->moverRect.y += two->gravity;
+    if (two->moverRect.y >= 400) 
+    {
+        two->moverRect.y = 400;
+    }
+}
+
+
 void MidMischief::animatechars()
 {
     one->animation();

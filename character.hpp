@@ -18,6 +18,7 @@ class character
         int y_jump = 20;
 
     public:
+        int gravity = 0;
         // source and mover rectangle
         SDL_Rect srcRect, moverRect;
         Map graph;

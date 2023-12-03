@@ -21,7 +21,9 @@ void character::move(char direction)
     {
         // if (moverRect.y - y_jump > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y - y_jump, graph))
         if (moverRect.y - y_jump > 0)
-            moverRect.y -= y_jump;
+            // moverRect.y -= y_jump;
+            gravity = -23;
+
     }
     else if (direction == 'D')
     {
