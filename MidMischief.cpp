@@ -59,6 +59,27 @@ void MidMischief::movechars(const Uint8* keystates)
     direction_2 = ' ';
 }
 
+<<<<<<< Updated upstream
+=======
+void MidMischief::apply_gravity() 
+{
+    //one->gravity += 1; // moon gravity
+    one->moverRect.y += 5;
+    if (one->moverRect.y >= one->currentY) 
+    {
+        one->moverRect.y = one->currentY;
+    }
+
+    //two->gravity += 3; // earth gravity
+    two->moverRect.y += 5;
+    if (two->moverRect.y >= two->currentY) 
+    {
+        two->moverRect.y = two->currentY;
+    }
+}
+
+
+>>>>>>> Stashed changes
 void MidMischief::animatechars()
 {
     one->animation();

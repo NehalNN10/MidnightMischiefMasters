@@ -17,7 +17,7 @@ Map::Map(){
         }
 
         // Connect nodes vertically
-        int arr[NUM_BLOCKS_Y] = {0, 2, 14, 1, 10, 6, 25, 4, 9, 17, 3, 23, 11, 7, 15, 5, 12, 22, 28, 19, 8, 27, 13, 24, 26, 18, 29, 21, 16, 20};
+        int arr[NUM_BLOCKS_Y] = {0, 3, 23, 39, 19, 10, 10, 10};
 
 
         for (int j = 0; j < NUM_BLOCKS_Y - 1; j++) {

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "character.hpp"
 #include "drawing.hpp"
-
+//graph
 // draws character
 void character::draw() 
 {
@@ -15,7 +15,62 @@ void character::animation()
     srcRect = frames[frame];
 }
 
+<<<<<<< Updated upstream
 bool character::isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const Map& map){
+=======
+void character::move(char direction)
+{
+    if (direction == 'U' && moverRect.y == currentY)
+    {
+        if (moverRect.y - y_jump > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y - y_jump, graph)){
+        //if (moverRect.y - y_jump > 0)
+            moverRect.y -= 85;
+            flag = false;}
+            //gravity = -23;
+        else if (moverRect.y - 20 > 0){
+            moverRect.y -= 20;
+        }
+
+    }
+    //else if (direction == 'D')
+    //{
+        if (flag && moverRect.y + y_jump < 550 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y + y_jump, graph))
+        //if (moverRect.y + y_jump < 550)
+            {
+            currentY += 75;
+            flag = false;
+            //moverRect.y += y_jump;
+            }
+    //}
+    if (direction == 'R')
+    {
+        if (moverRect.x + x_jump < 950 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x + x_jump, moverRect.y, graph))
+        //if (moverRect.x + x_jump < 950)
+            {
+                moverRect.x += x_jump;
+                flag = true;
+                if (moverRect.y + 60 < currentY){
+                    currentY -= 75;
+                }
+            }
+    }
+    else if (direction == 'L')
+    {
+        if (moverRect.x - x_jump > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x - x_jump, moverRect.y, graph))
+        //if (moverRect.x - x_jump > 0)
+            {
+                moverRect.x -= x_jump;
+                flag = true;
+                if (moverRect.y + 60 < currentY){
+                    currentY -= 75;
+                }
+                }
+    }
+}
+
+bool character::isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const Map &map)
+{
+>>>>>>> Stashed changes
     int destNodeX = destinationX / Map::BLOCK_WIDTH;
     int destNodeY = destinationY / Map::BLOCK_HEIGHT;
 

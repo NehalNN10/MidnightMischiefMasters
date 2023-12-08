@@ -9,15 +9,21 @@ class character
     private:
         position *p;
         speed *s;
+        bool flag = true;
     protected:
         // for animations
         int frame;
         SDL_Rect* frames = new SDL_Rect[4];
 
         int x_jump = 20;
-        int y_jump = 20;
+        int y_jump = 75;
 
     public:
+<<<<<<< Updated upstream
+=======
+        int gravity = 0;
+        int currentY = 400;
+>>>>>>> Stashed changes
         // source and mover rectangle
         SDL_Rect srcRect, moverRect;
         Map graph;

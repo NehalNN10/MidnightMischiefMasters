@@ -62,6 +62,51 @@ bool Game::init()
 	return success;
 }
 
+<<<<<<< Updated upstream
+=======
+bool Game::gameStart()
+{
+	// Loading success flag
+	bool success = true;
+	gTexture = loadTexture("backTemp.png");
+	screen = 1;
+	if (gTexture == NULL)
+	{
+		printf("Unable to run due to error: %s\n", SDL_GetError());
+		success = false;
+	}
+	return success;
+}
+
+bool Game::gamePause()
+{
+	// Loading success flag
+	bool success = true;
+	gTexture = loadTexture("pause_screen.jpg");
+	screen = 2;
+	if (gTexture == NULL)
+	{
+		printf("Unable to run due to error: %s\n", SDL_GetError());
+		success = false;
+	}
+	return success;
+}
+
+bool Game::controls()
+{
+	bool success = true;
+	gTexture = loadTexture("controls.png");
+	screen = 3;
+	if (gTexture == NULL)
+	{
+		printf("Unable to run due to error: %s\n", SDL_GetError());
+		success = false;
+	}
+	return success;
+}
+
+
+>>>>>>> Stashed changes
 bool Game::loadMedia()
 {
 	//Loading success flag
