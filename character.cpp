@@ -17,31 +17,49 @@ void character::animation()
 
 void character::move(char direction)
 {
-    if (direction == 'U')
+    if (direction == 'U' && moverRect.y ==currentY)
     {
-        // if (moverRect.y - y_jump > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y - y_jump, graph))
-        if (moverRect.y - y_jump > 0)
-            // moverRect.y -= y_jump;
-            gravity = -23;
+        if (moverRect.y - y_jump > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y - y_jump, graph))
+        //if (moverRect.y - y_jump > 0)
+            {// moverRect.y -= y_jump;
+            //gravity = -80;
+            moverRect.y -= 80;
+            flag = false;}
+        else if (moverRect.y - 20 > 0){
+            moverRect.y -= 20;
+        }
 
     }
-    else if (direction == 'D')
-    {
-        // if (moverRect.y + y_jump < 550 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y + y_jump, graph))
-        if (moverRect.y + y_jump < 550)
-            moverRect.y += y_jump;
-    }
+    //else if (direction == 'D')
+    //{
+        if (flag && moverRect.y + y_jump < 550 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y + y_jump, graph))
+        //if (moverRect.y + y_jump < 550)
+        {
+            //moverRect.y += y_jump;
+            currentY += 75;
+            flag = false;
+        }
+    //}
     if (direction == 'R')
     {
-        // if (moverRect.x + x_jump < 950 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x + x_jump, moverRect.y, graph))
-        if (moverRect.x + x_jump < 950)
-            moverRect.x += x_jump;
+        if (moverRect.x + x_jump < 950 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x + x_jump, moverRect.y, graph))
+        //if (moverRect.x + x_jump < 950)
+            {moverRect.x += x_jump;
+            flag = true;
+                if (moverRect.y + 60 < currentY){
+                    currentY -= 75;
+                }
+            }
     }
     else if (direction == 'L')
     {
-        // if (moverRect.x - x_jump > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x - x_jump, moverRect.y, graph))
-        if (moverRect.x - x_jump > 0)
-            moverRect.x -= x_jump;
+         if (moverRect.x - x_jump > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x - x_jump, moverRect.y, graph))
+        //if (moverRect.x - x_jump > 0)
+            {moverRect.x -= x_jump;
+            flag = true;
+                if (moverRect.y + 60 < currentY){
+                    currentY -= 75;
+                }}
     }
 }
 

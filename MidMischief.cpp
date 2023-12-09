@@ -77,18 +77,18 @@ void MidMischief::movechars(const Uint8* keystates)
 
 void MidMischief::apply_gravity() 
 {
-    one->gravity += 1; // moon gravity
-    one->moverRect.y += one->gravity;
-    if (one->moverRect.y >= 400) 
+    //one->gravity += 5; // moon gravity
+    one->moverRect.y += 5;
+    if (one->moverRect.y >= one->currentY) 
     {
-        one->moverRect.y = 400;
+        one->moverRect.y = one->currentY;
     }
 
-    two->gravity += 3; // earth gravity
-    two->moverRect.y += two->gravity;
-    if (two->moverRect.y >= 400) 
+    //two->gravity += 5; // earth gravity
+    two->moverRect.y += 5;
+    if (two->moverRect.y >= two->currentY) 
     {
-        two->moverRect.y = 400;
+        two->moverRect.y = two->currentY;
     }
 }
 

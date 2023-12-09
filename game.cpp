@@ -82,7 +82,7 @@ bool Game::gameStart()
 {
 	// Loading success flag
 	bool success = true;
-	gTexture = loadTexture("background.jpg");
+	gTexture = loadTexture("tempBack.png");
 	screen = 1;
 	if (gTexture == NULL)
 	{

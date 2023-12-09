@@ -8,7 +8,7 @@ public:
 
     // Dimensions of each block or node
     static const int BLOCK_WIDTH = 20;
-    static const int BLOCK_HEIGHT = 20;
+    static const int BLOCK_HEIGHT = 75;
 
     // Number of blocks in x and y directions
     static const int NUM_BLOCKS_X = SCREEN_WIDTH / BLOCK_WIDTH;
