@@ -30,6 +30,7 @@ class MidMischief {
         void drawchars();
         void animatechars();
         void movechars(const Uint8* keystates);
+        void apply_gravity();
         bool getpaused();
         void toggle_paused(bool p);
         void allCollisions();

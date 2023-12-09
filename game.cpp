@@ -289,6 +289,8 @@ void Game::run()
 		{
 			// draws both characs
 			midnight->drawchars();
+			// moving the characters down
+			midnight->apply_gravity();
 			// animates both characs
 			midnight->animatechars();
 			// check if collisions b/w characters
@@ -300,7 +302,7 @@ void Game::run()
 
 		SDL_RenderPresent(Drawing::gRenderer); // displays the updated renderer
 
-		SDL_Delay(100); // causes sdl engine to delay for specified miliseconds
+		SDL_Delay(40); // causes sdl engine to delay for specified miliseconds
 	}
 	delete midnight;
 	midnight = nullptr;
