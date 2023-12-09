@@ -37,4 +37,6 @@ public:
     bool gameStart();
     bool gamePause();
     bool controls();
+    bool how_to_play();
+    bool credits();
 };

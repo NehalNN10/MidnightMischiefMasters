@@ -13,7 +13,9 @@ static int screen = 0; // decides whether game runs or not
 0 = starting screen
 1 = playing screen
 2 = pause screen
-3 = controls
+3 = how to play
+4 = credits
+5 = controls
 */
 
 bool Game::init()
@@ -106,11 +108,38 @@ bool Game::gamePause()
 	return success;
 }
 
+bool Game::credits()
+{
+	// Loading success flag
+	bool success = true;
+	gTexture = loadTexture("pause_screen.jpg");
+	screen = 4;
+	if (gTexture == NULL)
+	{
+		printf("Unable to run due to error: %s\n", SDL_GetError());
+		success = false;
+	}
+	return success;
+}
+
+bool Game::how_to_play()
+{
+	bool success = true;
+	gTexture = loadTexture("How to play.png");
+	screen = 3;
+	if (gTexture == NULL)
+	{
+		printf("Unable to run due to error: %s\n", SDL_GetError());
+		success = false;
+	}
+	return success;
+}
+
 bool Game::controls()
 {
 	bool success = true;
 	gTexture = loadTexture("controls.png");
-	screen = 3;
+	screen = 5;
 	if (gTexture == NULL)
 	{
 		printf("Unable to run due to error: %s\n", SDL_GetError());
@@ -237,15 +266,22 @@ void Game::run()
 				{
 					gameStart();
 				}
-				else if (xMouse > 384 && xMouse < 632 && yMouse > 415 && yMouse < 446 && screen == 0)
+				else if (xMouse > 349 && xMouse < 669 && yMouse > 417 && yMouse < 444 && screen == 0)
+				{
+					how_to_play();
+				}
+				else if (xMouse > 399 && xMouse < 596 && yMouse > 510 && yMouse < 572 && screen == 3)
 				{
 					controls();
 				}
 			}
 
-			if (e.type == SDL_KEYDOWN && screen==3 && e.key.keysym.sym == SDLK_ESCAPE)
+			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)
 			{
-				loadMedia();
+				if (screen == 3) //go back to main screen when you press ESCAPE in How to Play screen
+					loadMedia();
+				else if (screen == 5) // go back to How to Play when you press ESCAPE in controls screen
+					how_to_play();
 			}
 
 			// to pause and unpause the screen
@@ -269,13 +305,13 @@ void Game::run()
 				// Call your function to handle character movement
 				midnight->movechars(currentKeyStates);
 			}
-			if (Mix_PlayingMusic()==0 && (screen==0 || screen == 3)) //playing music here
+			if (Mix_PlayingMusic()==0 && (screen !=1 && screen != 2)) //playing music here
 			{
 				Mix_PlayMusic(gMusic, -1);
 			}
 			else
 			{
-				if (Mix_PlayingMusic() && screen != 0 && screen != 3)
+				if (Mix_PlayingMusic() && screen == 1 && screen == 2)
 					Mix_HaltMusic();
 			}
 		}
