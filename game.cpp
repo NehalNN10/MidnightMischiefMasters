@@ -1,7 +1,7 @@
+#include <iostream>
 #include "game.hpp"
 #include "midMischief.hpp"
 #include "drawing.hpp"
-#include <iostream>
 
 SDL_Renderer *Drawing::gRenderer = NULL;
 SDL_Texture *Drawing::assets = NULL;

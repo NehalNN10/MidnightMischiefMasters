@@ -1,5 +1,5 @@
-#include "fireBoy.hpp"
 #include <iostream>
+#include "fireBoy.hpp"
 
 fireBoy::fireBoy()
 {  

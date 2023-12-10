@@ -1,6 +1,5 @@
 #include <iostream>
 #include "character.hpp"
-#include "drawing.hpp"
 
 character::character()
 {

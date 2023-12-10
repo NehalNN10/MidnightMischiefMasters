@@ -1,7 +1,6 @@
-#include "midMischief.hpp"
-#include "drawing.hpp"
-#include "iostream"
+#include <iostream>
 #include <bits/stdc++.h>
+#include "midMischief.hpp"
 
 midMischief::midMischief() 
 {

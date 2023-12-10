@@ -7,6 +7,7 @@
 #include "collectibles.hpp"
 #include "collisionClass.hpp"
 #include "paperOne.hpp"
+#include "drawing.hpp"
 
 #include "vector"
 #include <iostream>

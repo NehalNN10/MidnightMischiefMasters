@@ -1,5 +1,5 @@
-#include "waterGirl.hpp"
 #include <iostream>
+#include "waterGirl.hpp"
 
 waterGirl::waterGirl() 
 {    

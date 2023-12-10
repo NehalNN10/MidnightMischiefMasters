@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include "map.hpp"
+#include "drawing.hpp"
 
 class character 
 {

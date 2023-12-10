@@ -1,6 +1,5 @@
 #include <iostream>
 #include "collectibles.hpp"
-#include "drawing.hpp"
 
 collectibles::collectibles() 
 {
