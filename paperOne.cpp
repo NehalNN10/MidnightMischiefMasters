@@ -5,7 +5,7 @@ paperOne::paperOne(SDL_Rect mR)
 {   
     std::cout<<"paperOne Ctor Called\n";
     
-    // 15 different animation types
+    // 9 different animation types
     frames[0] = {123, 82, 284, 232};
     frames[1] = {608, 90, 302, 222};
     frames[2] = {1152, 98, 307, 240};
