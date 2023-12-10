@@ -285,7 +285,7 @@ void Game::run()
 			}
 
 			// to pause and unpause the screen
-			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p)
+			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p && (screen == 1 || screen == 2))
 			{
 				if (midnight->getpaused() == false)
 				{
@@ -311,7 +311,7 @@ void Game::run()
 			}
 			else
 			{
-				if (Mix_PlayingMusic() && screen == 1 && screen == 2)
+				if (Mix_PlayingMusic() && (screen == 1 || screen == 2))
 					Mix_HaltMusic();
 			}
 		}

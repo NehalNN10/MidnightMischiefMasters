@@ -15,14 +15,21 @@ void character::animation()
     srcRect = frames[frame];
 }
 
+bool character::jump_available()
+{
+    return character::moverRect.y + character::moverRect.h >= 450;
+}
+
 void character::move(char direction)
 {
     if (direction == 'U')
     {
         // if (moverRect.y - y_jump > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y - y_jump, graph))
-        if (moverRect.y - y_jump > 0)
+        if (moverRect.y - y_jump > 0 && jump_available())
+        {
             // moverRect.y -= y_jump;
             gravity = -23;
+        }
 
     }
     else if (direction == 'D')
@@ -36,13 +43,17 @@ void character::move(char direction)
         // if (moverRect.x + x_jump < 950 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x + x_jump, moverRect.y, graph))
         if (moverRect.x + x_jump < 950)
             moverRect.x += x_jump;
+            setright(true);
     }
     else if (direction == 'L')
     {
         // if (moverRect.x - x_jump > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x - x_jump, moverRect.y, graph))
         if (moverRect.x - x_jump > 0)
             moverRect.x -= x_jump;
+            setleft(true);
     }
+    setleft(false);
+    setright(false);
 }
 
 bool character::isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const Map &map)

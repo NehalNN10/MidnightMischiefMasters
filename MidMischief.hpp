@@ -36,4 +36,5 @@ class MidMischief {
         void allCollisions();
         void show_score();
         void text_score();
+        void apply_friction();
 };

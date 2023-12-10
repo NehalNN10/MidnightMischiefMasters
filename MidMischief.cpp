@@ -3,7 +3,8 @@
 #include "iostream"
 #include <bits/stdc++.h>
 
-MidMischief::MidMischief() {
+MidMischief::MidMischief()
+{
     score = 0;
     one = new fireboy();
     two = new watergirl();
@@ -12,7 +13,7 @@ MidMischief::MidMischief() {
     //? drawing random collectibles for testing purposes
     for (int i = 0; i < 5; i++)
     {
-        collectibles_list.push_back(new paper1({rand() % 1000-50, rand() % 400-50, 50, 50}));
+        collectibles_list.push_back(new paper1({rand() % (1000 - 50), rand() % (400 - 50), 50, 50}));
     }
 }
 
@@ -23,16 +24,14 @@ void MidMischief::drawchars()
 {
     one->draw();
     two->draw();
-    for (auto & element : collectibles_list)
+    for (auto &element : collectibles_list)
     {
         element->draw();
     }
-    // first->draw();
 }
 
-
-//asynchronous movement achieved
-void MidMischief::movechars(const Uint8* keystates) 
+// asynchronous movement achieved
+void MidMischief::movechars(const Uint8 *keystates)
 {
     // Movement keys for character 1
     if (keystates[SDL_SCANCODE_W])
@@ -43,7 +42,7 @@ void MidMischief::movechars(const Uint8* keystates)
     {
         direction_1 = 'D';
     }
-    else if (keystates[SDL_SCANCODE_A])
+    if (keystates[SDL_SCANCODE_A])
     {
         direction_1 = 'L';
     }
@@ -61,7 +60,7 @@ void MidMischief::movechars(const Uint8* keystates)
     {
         direction_2 = 'D';
     }
-    else if (keystates[SDL_SCANCODE_LEFT])
+    if (keystates[SDL_SCANCODE_LEFT])
     {
         direction_2 = 'L';
     }
@@ -69,69 +68,75 @@ void MidMischief::movechars(const Uint8* keystates)
     {
         direction_2 = 'R';
     }
-    two->move(direction_1); //passing in characters as they take less space than sdlkey objects 
+    two->move(direction_1); // passing in characters as they take less space than sdlkey objects
     one->move(direction_2);
     direction_1 = ' ';
     direction_2 = ' ';
 }
 
-void MidMischief::apply_gravity() 
+void MidMischief::apply_gravity()
 {
-    one->gravity += 1; // moon gravity
+    one->gravity += 2; // moon gravity
     one->moverRect.y += one->gravity;
-    if (one->moverRect.y >= 400) 
+    one->moverRect.x += one->getleft() * -one->get_x_jump();
+    one->moverRect.x += one->getright() * one->get_x_jump();
+    if (one->moverRect.y >= 400)
     {
         one->moverRect.y = 400;
     }
 
-    two->gravity += 3; // earth gravity
+    two->gravity += 2; // earth gravity
     two->moverRect.y += two->gravity;
-    if (two->moverRect.y >= 400) 
+    two->moverRect.x += two->getleft() * -two->get_x_jump();
+    two->moverRect.x += two->getright() * two->get_x_jump();
+    if (two->moverRect.y >= 400)
     {
         two->moverRect.y = 400;
     }
 }
-
 
 void MidMischief::animatechars()
 {
     one->animation();
     two->animation();
     // first->animation();
-    for (auto & element : collectibles_list)
+    for (auto &element : collectibles_list)
     {
         element->animation();
     }
 }
 
 void MidMischief::allCollisions()
-{   
-    for (auto & element : collectibles_list)
+{
+    for (auto &element : collectibles_list)
     {
-    if (collisionChecker::collisionCheck(element->moverRect,two->moverRect) && element->collected == false){
-        score++;
-        element->collected = true;
-    }
-    if (collisionChecker::collisionCheck(element->moverRect,one->moverRect) && element->collected == false){
-        score++;
-        element->collected = true;
-    }
-    // deleting collectible after it has been collected
-    if (element->collected)
-    {
-        auto it = std::find(collectibles_list.begin(), collectibles_list.end(), element);
-        collectibles_list.erase(it);
-    }
-    // std::cout<<"Score" << score << std::endl;
+        if (collisionChecker::collisionCheck(element->moverRect, two->moverRect) && element->collected == false)
+        {
+            score++;
+            element->collected = true;
+        }
+        if (collisionChecker::collisionCheck(element->moverRect, one->moverRect) && element->collected == false)
+        {
+            score++;
+            element->collected = true;
+        }
+        // deleting collectible after it has been collected
+        if (element->collected)
+        {
+            auto it = std::find(collectibles_list.begin(), collectibles_list.end(), element);
+            collectibles_list.erase(it);
+        }
+        // std::cout<<"Score" << score << std::endl;
     }
 }
 
-void MidMischief::show_score(){
+void MidMischief::show_score()
+{
     // SDL_Init();
     TTF_Init();                                                                              // Initializes SDL_TTF for displaying text in
     TTF_Font *font = TTF_OpenFont("arial.ttf", 24);                                          // Opens a font style that can be downloaded as a .ttf file and sets a font size
     SDL_Color color = {0, 0, 0};                                                             // This is the texts color that can be changed using RGB values from 0 to 255.
-    std::string tmp = std::to_string(score);                                                           // converts score to string that can later be displayed using the font file - hence why we needed font.
+    std::string tmp = std::to_string(score);                                                 // converts score to string that can later be displayed using the font file - hence why we needed font.
     SDL_Surface *surfacemessage = TTF_RenderText_Solid(font, tmp.c_str(), color);            // A surface is created using functions from SDL library that displays the score on the screen.
     SDL_Texture *Message = SDL_CreateTextureFromSurface(Drawing::gRenderer, surfacemessage); // Converts into texture that can be displayed
     SDL_Rect Message_rect = {944, 12, 50, 30};                                               // create a rect for it
@@ -148,10 +153,10 @@ void MidMischief::text_score()
     TTF_Init();                                                                              // Initializes SDL_TTF for displaying text in
     TTF_Font *font = TTF_OpenFont("arial.ttf", 24);                                          // Opens a font style that can be downloaded as a .ttf file and sets a font size
     SDL_Color color = {0, 0, 0};                                                             // This is the texts color that can be changed using RGB values from 0 to 255.
-    std::string tmp = "Pappars collected : ";                                                                 // converts score to string that can later be displayed using the font file - hence why we needed font.
+    std::string tmp = "Pappars collected : ";                                                // converts score to string that can later be displayed using the font file - hence why we needed font.
     SDL_Surface *surfacemessage = TTF_RenderText_Solid(font, tmp.c_str(), color);            // A surface is created using functions from SDL library that displays the score on the screen.
     SDL_Texture *Message = SDL_CreateTextureFromSurface(Drawing::gRenderer, surfacemessage); // Converts into texture that can be displayed
-    SDL_Rect Message_rect = {774, 12, 130, 30};                                                // create a rect for it
+    SDL_Rect Message_rect = {774, 12, 130, 30};                                              // create a rect for it
     SDL_RenderCopy(Drawing::gRenderer, Message, NULL, &Message_rect);
     SDL_FreeSurface(surfacemessage);
     SDL_DestroyTexture(Message);
