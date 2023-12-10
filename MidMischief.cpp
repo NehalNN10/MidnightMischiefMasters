@@ -3,7 +3,8 @@
 #include "iostream"
 #include <bits/stdc++.h>
 
-MidMischief::MidMischief() {
+MidMischief::MidMischief() 
+{
     score = 0;
     one = new fireboy();
     two = new watergirl();
@@ -12,7 +13,7 @@ MidMischief::MidMischief() {
     //? drawing random collectibles for testing purposes
     for (int i = 0; i < 5; i++)
     {
-        collectibles_list.push_back(new paper1({rand() % 1000-50, rand() % 400-50, 50, 50}));
+        collectibles_list.push_back(new paper1({rand() % (1000-50), rand() % (400-50), 50, 50}));
     }
 }
 
@@ -23,7 +24,7 @@ void MidMischief::drawchars()
 {
     one->draw();
     two->draw();
-    for (auto & element : collectibles_list)
+    for (auto &element : collectibles_list)
     {
         element->draw();
     }
@@ -31,7 +32,7 @@ void MidMischief::drawchars()
 }
 
 
-//asynchronous movement achieved
+// asynchronous movement achieved
 void MidMischief::movechars(const Uint8* keystates) 
 {
     // Movement keys for character 1
@@ -43,7 +44,7 @@ void MidMischief::movechars(const Uint8* keystates)
     {
         direction_1 = 'D';
     }
-    else if (keystates[SDL_SCANCODE_A])
+    if (keystates[SDL_SCANCODE_A])
     {
         direction_1 = 'L';
     }
@@ -61,7 +62,7 @@ void MidMischief::movechars(const Uint8* keystates)
     {
         direction_2 = 'D';
     }
-    else if (keystates[SDL_SCANCODE_LEFT])
+    if (keystates[SDL_SCANCODE_LEFT])
     {
         direction_2 = 'L';
     }
@@ -69,13 +70,13 @@ void MidMischief::movechars(const Uint8* keystates)
     {
         direction_2 = 'R';
     }
-    two->move(direction_1); //passing in characters as they take less space than sdlkey objects 
+    two->move(direction_1); // passing in characters as they take less space than sdlkey objects 
     one->move(direction_2);
     direction_1 = ' ';
     direction_2 = ' ';
 }
 
-void MidMischief::apply_gravity() 
+void MidMischief::apply_gravity()
 {
     //one->gravity += 5; // moon gravity
     one->moverRect.y += 5;
@@ -97,8 +98,8 @@ void MidMischief::animatechars()
 {
     one->animation();
     two->animation();
-    // first->animation();
-    for (auto & element : collectibles_list)
+
+    for (auto &element : collectibles_list)
     {
         element->animation();
     }
@@ -106,27 +107,28 @@ void MidMischief::animatechars()
 
 void MidMischief::allCollisions()
 {   
-    for (auto & element : collectibles_list)
+    for (auto &element : collectibles_list)
     {
-    if (collisionChecker::collisionCheck(element->moverRect,two->moverRect) && element->collected == false){
-        score++;
-        element->collected = true;
-    }
-    if (collisionChecker::collisionCheck(element->moverRect,one->moverRect) && element->collected == false){
-        score++;
-        element->collected = true;
-    }
-    // deleting collectible after it has been collected
-    if (element->collected)
-    {
-        auto it = std::find(collectibles_list.begin(), collectibles_list.end(), element);
-        collectibles_list.erase(it);
-    }
-    // std::cout<<"Score" << score << std::endl;
+        if (collisionChecker::collisionCheck(element->moverRect,two->moverRect) && element->collected == false){
+            score++;
+            element->collected = true;
+        }
+        if (collisionChecker::collisionCheck(element->moverRect,one->moverRect) && element->collected == false){
+            score++;
+            element->collected = true;
+        }
+        // deleting collectible after it has been collected
+        if (element->collected)
+        {
+            auto it = std::find(collectibles_list.begin(), collectibles_list.end(), element);
+            collectibles_list.erase(it);
+        }
+        // std::cout<<"Score" << score << std::endl;
     }
 }
 
-void MidMischief::show_score(){
+void MidMischief::show_score()
+{
     // SDL_Init();
     TTF_Init();                                                                              // Initializes SDL_TTF for displaying text in
     TTF_Font *font = TTF_OpenFont("arial.ttf", 24);                                          // Opens a font style that can be downloaded as a .ttf file and sets a font size
