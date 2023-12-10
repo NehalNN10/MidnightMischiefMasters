@@ -1,6 +1,6 @@
-#include "MapNode.hpp"
+#include "mapNode.hpp"
 
-class Map {
+class map {
 public:
     // Screen dimensions
     static const int SCREEN_WIDTH = 1000;
@@ -15,8 +15,8 @@ public:
     static const int NUM_BLOCKS_Y = SCREEN_HEIGHT / BLOCK_HEIGHT;
 
     // 2D array to store nodes
-    MapNode nodes[NUM_BLOCKS_X][NUM_BLOCKS_Y];
+    mapNode nodes[NUM_BLOCKS_X][NUM_BLOCKS_Y];
 
-    Map();
-
+    map();
+    ~map();
 };

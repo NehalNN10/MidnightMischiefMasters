@@ -1,12 +1,14 @@
 #pragma once
 #include <vector>
 
-class MapNode {
-public:
-    int x, y;
+class mapNode {
+    public:
 
-    // For simplicity, you can store the indices of connected nodes.
-    std::vector<int> connectedNodes;
+        int mapX, mapY;
 
-    MapNode(int xPos = 0, int yPos = 0);
+        // For simplicity, you can store the indices of connected nodes.
+        std::vector<int> connectedNodes;
+        mapNode(int posX = 0, int posY = 0);
+        ~mapNode();
+
 };

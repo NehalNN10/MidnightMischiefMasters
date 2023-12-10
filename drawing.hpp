@@ -1,7 +1,8 @@
 #pragma once
 #include<SDL.h>
 
-class Drawing{
+class Drawing
+{
     public:
         //The window renderer
         static SDL_Renderer* gRenderer;

@@ -1,39 +1,43 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
+
 #include "character.hpp"
-#include "fireboy.hpp"
-#include "watergirl.hpp"
+#include "fireBoy.hpp"
+#include "waterGirl.hpp"
 #include "collectibles.hpp"
-#include "collisionCheck.hpp"
-// #include "score.hpp"
-#include "paper1.hpp"
+#include "collisionClass.hpp"
+#include "paperOne.hpp"
+
 #include "vector"
 #include <iostream>
 #include <string>
 
-class MidMischief {
+class midMischief {
 
     private:
         SDL_Window *gwindow;
+
         // dynamically created for virual and polymorphic behaviour
         character *one;
         character *two;
-        // collectibles *first;
-        std::vector<collectibles*> collectibles_list;
-        char direction_1;
-        char direction_2;
+        std::vector<collectibles*> collectiblesList;
+
+        char directionOne;
+        char directionTwo;
         bool paused;
         int score;
 
     public:
-        MidMischief();
-        void drawchars();
-        void animatechars();
-        void movechars(const Uint8* keystates);
-        void apply_gravity();
-        bool getpaused();
-        void toggle_paused(bool p);
+
+        midMischief();
+        ~midMischief();
+        void drawCharacters();
+        void animateCharacters();
+        void moveCharacters(const Uint8* keyStates);
+        void applyGravity();
+        bool getPaused();
+        void togglePaused(bool p);
         void allCollisions();
-        void show_score();
-        void text_score();
+        void showScore();
+        void textScore();
 };

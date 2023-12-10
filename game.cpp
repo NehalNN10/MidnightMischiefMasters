@@ -1,6 +1,6 @@
 #include "game.hpp"
-#include "MidMischief.hpp"
-#include "Drawing.hpp"
+#include "midMischief.hpp"
+#include "drawing.hpp"
 #include <iostream>
 
 SDL_Renderer *Drawing::gRenderer = NULL;
@@ -84,7 +84,7 @@ bool Game::gameStart()
 {
 	// Loading success flag
 	bool success = true;
-	gTexture = loadTexture("tempBack.png");
+	gTexture = loadTexture("Assets/tempBack.png");
 	screen = 1;
 	if (gTexture == NULL)
 	{
@@ -98,7 +98,7 @@ bool Game::gamePause()
 {
 	// Loading success flag
 	bool success = true;
-	gTexture = loadTexture("pause_screen.jpg");
+	gTexture = loadTexture("Assets/pause_screen.jpg");
 	screen = 2;
 	if (gTexture == NULL)
 	{
@@ -112,7 +112,7 @@ bool Game::credits()
 {
 	// Loading success flag
 	bool success = true;
-	gTexture = loadTexture("pause_screen.jpg");
+	gTexture = loadTexture("Assets/pause_screen.jpg");
 	screen = 4;
 	if (gTexture == NULL)
 	{
@@ -122,10 +122,10 @@ bool Game::credits()
 	return success;
 }
 
-bool Game::how_to_play()
+bool Game::howToPlay()
 {
 	bool success = true;
-	gTexture = loadTexture("How to play.png");
+	gTexture = loadTexture("Assets/How to play.png");
 	screen = 3;
 	if (gTexture == NULL)
 	{
@@ -138,7 +138,7 @@ bool Game::how_to_play()
 bool Game::controls()
 {
 	bool success = true;
-	gTexture = loadTexture("controls.png");
+	gTexture = loadTexture("Assets/controls.png");
 	screen = 3;
 	if (gTexture == NULL)
 	{
@@ -154,17 +154,17 @@ bool Game::loadMedia()
 	// Loading success flag
 	bool success = true;
 	screen = 0;
-	Drawing::assets = loadTexture("assets.png");
-	Drawing::collect = loadTexture("collect.png");
+	Drawing::assets = loadTexture("Assets/assets.png");
+	Drawing::collect = loadTexture("Assets/collect.png");
 	// gTexture = loadTexture("background.jpg");
-	gTexture = loadTexture("Midnight mischief masters.png");
+	gTexture = loadTexture("Assets/Midnight mischief masters.png");
 	if (gTexture == NULL || Drawing::assets == NULL || Drawing::collect == NULL)
 	{
 		printf("Unable to run due to error: %s\n", SDL_GetError());
 		success = false;
 	}
 	// playing background music
-	gMusic = Mix_LoadMUS("bgmusic.mp3");
+	gMusic = Mix_LoadMUS("Assets/bgmusic.mp3");
 	if (gMusic == NULL)
 	{
 		printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
@@ -240,9 +240,10 @@ void Game::run()
 {
 	bool quit = false;
 	SDL_Event e;
-	MidMischief *midnight = new MidMischief(); // game object, all game functions should be in MidMischief class
 	// dynamic allocation
-	midnight->toggle_paused(false);
+	midMischief *midNight = new midMischief();
+
+	midNight->togglePaused(false);
 
 	while (!quit)
 	{
@@ -268,7 +269,7 @@ void Game::run()
 				}
 				else if (xMouse > 349 && xMouse < 669 && yMouse > 417 && yMouse < 444 && screen == 0)
 				{
-					how_to_play();
+					howToPlay();
 				}
 				else if (xMouse > 399 && xMouse < 596 && yMouse > 510 && yMouse < 572 && screen == 3)
 				{
@@ -281,29 +282,30 @@ void Game::run()
 				if (screen == 3) //go back to main screen when you press ESCAPE in How to Play screen
 					loadMedia();
 				else if (screen == 5) // go back to How to Play when you press ESCAPE in controls screen
-					how_to_play();
+					howToPlay();
+
 			}
 
 			// to pause and unpause the screen
 			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p)
 			{
-				if (midnight->getpaused() == false)
+				if (midNight->getPaused() == false)
 				{
-					midnight->toggle_paused(true);
+					midNight->togglePaused(true);
 					gamePause();
 				}
-				else if (midnight->getpaused() == true)
+				else if (midNight->getPaused() == true)
 				{
-					midnight->toggle_paused(false);
+					midNight->togglePaused(false);
 					gameStart();
 				}
 			}
 
 			// Handle movement
-			if (!midnight->getpaused())
+			if (!midNight->getPaused())
 			{
 				// Call your function to handle character movement
-				midnight->movechars(currentKeyStates);
+				midNight->moveCharacters(currentKeyStates);
 			}
 			if (Mix_PlayingMusic()==0 && (screen==0 || screen == 3)) //playing music here
 			{
@@ -322,24 +324,29 @@ void Game::run()
 		//***********************draw the objects here********************
 
 		if (screen == 1)
-		{
+		{	
 			// draws both characs
-			midnight->drawchars();
-			// moving the characters down
-			midnight->apply_gravity();
+			midNight->drawCharacters();
+			
 			// animates both characs
-			midnight->animatechars();
-			// check if collisions b/w characters
-			// std::cout << midnight->checkCollision();
-			midnight -> allCollisions();
-			midnight->text_score();
-			midnight->show_score();
+			midNight->animateCharacters();
+
+			// moving the characters down
+			midNight->applyGravity();
+
+			// check collisions between paper and characters
+			midNight->allCollisions();
+
+			// shows score
+			midNight->textScore();
+			midNight->showScore();
 		}
 
 		SDL_RenderPresent(Drawing::gRenderer); // displays the updated renderer
 
 		SDL_Delay(40); // causes sdl engine to delay for specified miliseconds
 	}
-	delete midnight;
-	midnight = nullptr;
+
+	delete midNight;
+	midNight = nullptr;
 }

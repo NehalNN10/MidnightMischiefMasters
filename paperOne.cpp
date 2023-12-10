@@ -1,8 +1,10 @@
 #include <iostream>
-#include "paper1.hpp"
+#include "paperOne.hpp"
 
-paper1::paper1(SDL_Rect mr){
-    frame = 0;
+paperOne::paperOne(SDL_Rect mR)
+{   
+    std::cout<<"paperOne Ctor Called\n";
+    
     // 15 different animation types
     frames[0] = {34, 130, 124, 49};
     frames[1] = {226, 124, 124, 55};
@@ -20,7 +22,15 @@ paper1::paper1(SDL_Rect mr){
     frames[13] = {610, 457, 124, 106};
     frames[14] = {803, 458, 123, 104};
 
+    // first frame for animation
+    frame = 0;
     srcRect = frames[0];
-    // default co-ords to spawn character
-    moverRect = mr;
+    
+    // spawn at specific locations
+    moverRect = mR;
+}
+
+paperOne::~paperOne()
+{
+    std::cout<<"paperOne Dtor Called\n";
 }

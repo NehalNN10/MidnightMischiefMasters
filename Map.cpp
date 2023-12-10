@@ -1,10 +1,11 @@
 #include <iostream>
-#include "Map.hpp"
+#include "map.hpp"
 
-Map::Map(){
+map::map(){
+    std::cout<<"map Ctor Called\n";
     for (int i = 0; i < NUM_BLOCKS_X; ++i) {
             for (int j = 0; j < NUM_BLOCKS_Y; ++j) {
-                nodes[i][j] = MapNode(i * BLOCK_WIDTH, j * BLOCK_HEIGHT);
+                nodes[i][j] = mapNode(i * BLOCK_WIDTH, j * BLOCK_HEIGHT);
             }
         }
 
@@ -23,6 +24,10 @@ Map::Map(){
         for (int j = 0; j < NUM_BLOCKS_Y - 1; j++) {
             nodes[arr[j]][j].connectedNodes.push_back(arr[j] * NUM_BLOCKS_Y + (j + 1));
             nodes[arr[j]][j + 1].connectedNodes.push_back(arr[j] * NUM_BLOCKS_Y + j);
-        }
-        
+        }  
+}
+
+map::~map()
+{
+    std::cout<<"map Dtor Called\n";
 }

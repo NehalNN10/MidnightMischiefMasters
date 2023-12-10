@@ -1,32 +1,31 @@
 #pragma once
 #include <SDL.h>
-#include "position.hpp"
-#include "speed.hpp"
-#include "Map.hpp"
+#include "map.hpp"
 
 class character 
 {
     private:
-        position *p;
-        speed *s;
         bool flag = true;
+        int jumpX = 20;
+        int jumpY = 75;
+
     protected:
         // for animations
         int frame;
         SDL_Rect* frames = new SDL_Rect[4];
 
-        int x_jump = 20;
-        int y_jump = 75;
-
     public:
         int gravity = 0;
         int currentY = 400;
+
         // source and mover rectangle
         SDL_Rect srcRect, moverRect;
-        Map graph;
+        map graph;
 
+        character();
+        ~character();
         void draw();
         void animation();
-        bool isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const Map& map);
+        bool isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const map& map);
         void move(char direction);
 };

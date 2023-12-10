@@ -1,7 +1,10 @@
 #include <SDL.h>
 #include "character.hpp"
 
-class watergirl : public character {
+class waterGirl : public character 
+{
     public:
-        watergirl();
+        waterGirl();
+        ~waterGirl();
+
 };

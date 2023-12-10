@@ -2,10 +2,17 @@
 #include "collectibles.hpp"
 #include "drawing.hpp"
 
-
 collectibles::collectibles() 
 {
+    std::cout<<"collectibles Ctor Called\n";
     collected = false;
+}
+
+collectibles::~collectibles()
+{
+    std::cout<<"collectibles Dtor Called\n";
+    // delete all the attributes here, change it all to dynamic and delete them
+    // delete all the 15 frames as well
 }
 
 void collectibles::draw() 

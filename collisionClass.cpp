@@ -1,7 +1,7 @@
 #include<SDL.h>
-#include "collisionCheck.hpp"
+#include "collisionClass.hpp"
 
-bool collisionChecker::collisionCheck( SDL_Rect a, SDL_Rect b )
+bool collisionClass::collisionChecker( SDL_Rect a, SDL_Rect b )
 {
     //The sides of the rectangles
     int leftA, leftB;

@@ -1,7 +1,9 @@
 #include <SDL.h>
 #include "character.hpp"
 
-class fireboy : public character {
+class fireBoy : public character 
+{
     public:
-        fireboy();
+        fireBoy();
+        ~fireBoy();
 };

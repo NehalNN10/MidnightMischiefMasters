@@ -1,7 +1,14 @@
 #include <iostream>
-#include "MapNode.hpp"
+#include "mapNode.hpp"
 
-MapNode::MapNode(int xPos, int yPos){
-    x = xPos;
-    y = yPos;
+mapNode::mapNode(int posX, int posY)
+{  
+    std::cout<<"mapMode Ctor Called\n";
+    mapX = posX;
+    mapY = posY;
+}
+
+mapNode::~mapNode()
+{
+    std::cout<<"mapMode Dtor Called\n";
 }

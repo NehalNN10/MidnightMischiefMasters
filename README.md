@@ -1,5 +1,7 @@
-# MidnightMischiefMasters
-OOP Project for Fall 2023. Team name: BINary kings
+# Midnight Mischief Masters
+OOP Project for Fall 2023. 
+
+Team name: BINary kings
 
 # For Compiling
 
