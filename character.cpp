@@ -14,7 +14,7 @@ character::~character()
 // draws character
 void character::draw()
 {
-    SDL_RenderCopy(Drawing::gRenderer, Drawing::assets, &srcRect, &moverRect);
+    // implemenatation in derived classes
 }
 
 // changes animation of character

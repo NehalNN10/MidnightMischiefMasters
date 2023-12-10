@@ -24,3 +24,8 @@ waterGirl::~waterGirl()
     std::cout<<"waterGirl Dtor Called\n";
     // should delete here?
 } 
+
+void waterGirl::draw() 
+{
+    SDL_RenderCopy(Drawing::gRenderer, Drawing::assetTwo, &srcRect, &moverRect);
+}

@@ -24,3 +24,8 @@ fireBoy::~fireBoy()
     std::cout<<"fireBoy Dtor Called\n";
     // should delete here?
 } 
+
+void fireBoy::draw()
+{
+    SDL_RenderCopy(Drawing::gRenderer, Drawing::assetOne, &srcRect, &moverRect);
+}

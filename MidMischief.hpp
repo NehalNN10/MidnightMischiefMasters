@@ -19,8 +19,8 @@ class midMischief {
         SDL_Window *gwindow;
 
         // dynamically created for virual and polymorphic behaviour
-        character *one;
-        character *two;
+        character *one; // fireboy
+        character *two; // watergirl
         std::vector<collectibles*> collectiblesList;
 
         char directionOne;

@@ -25,7 +25,7 @@ class character
 
         character();
         ~character();
-        void draw();
+        virtual void draw();
         void animation();
         bool isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const map& map);
         void move(char direction);

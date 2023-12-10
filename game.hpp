@@ -21,7 +21,9 @@ class Game{
     //Current displayed texture
     SDL_Texture* gTexture = NULL;
     //global reference to png image sheets
-    SDL_Texture* assets=NULL;
+    SDL_Texture* assetOne=NULL;
+    SDL_Texture* assetTwo=NULL;
+
     SDL_Texture* collect=NULL;
 
     //for game music
