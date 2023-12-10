@@ -16,12 +16,12 @@ collectibles::~collectibles()
 
 void collectibles::draw() 
 {
-    SDL_RenderCopy(Drawing::gRenderer, Drawing::collect, &srcRect, &moverRect);
+    SDL_RenderCopy(Drawing::gRenderer, Drawing::paperOne, &srcRect, &moverRect);
 }
 
 // changes animation of collectibles
 void collectibles::animation()
 {
-    frame = (frame + 1) % 15;
+    frame = (frame + 1) % 9;
     srcRect = frames[frame];
 }

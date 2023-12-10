@@ -6,7 +6,7 @@
 SDL_Renderer *Drawing::gRenderer = NULL;
 SDL_Texture *Drawing::assetOne = NULL;
 SDL_Texture *Drawing::assetTwo = NULL;
-SDL_Texture *Drawing::collect = NULL;
+SDL_Texture *Drawing::paperOne = NULL;
 
 static int screen = 0; // decides whether game runs or not
 
@@ -157,10 +157,10 @@ bool Game::loadMedia()
 	screen = 0;
 	Drawing::assetOne = loadTexture("Assets/one.png");
 	Drawing::assetTwo = loadTexture("Assets/two.png");
-	Drawing::collect = loadTexture("Assets/collect.png");
+	Drawing::paperOne = loadTexture("Assets/paperOne.png");
 	// gTexture = loadTexture("background.jpg");
 	gTexture = loadTexture("Assets/Midnight mischief masters.png");
-	if (gTexture == NULL || Drawing::assetTwo == NULL || Drawing::assetOne == NULL || Drawing::collect == NULL)
+	if (gTexture == NULL || Drawing::assetTwo == NULL || Drawing::assetOne == NULL || Drawing::paperOne == NULL)
 	{
 		printf("Unable to run due to error: %s\n", SDL_GetError());
 		success = false;
@@ -184,8 +184,8 @@ void Game::close()
 	SDL_DestroyTexture(Drawing::assetTwo);
 	Drawing::assetTwo = NULL;
 	SDL_DestroyTexture(gTexture);
-	SDL_DestroyTexture(Drawing::collect);
-	Drawing::collect = NULL;
+	SDL_DestroyTexture(Drawing::paperOne);
+	Drawing::paperOne = NULL;
 
 	// Destroy window
 	SDL_DestroyRenderer(Drawing::gRenderer);

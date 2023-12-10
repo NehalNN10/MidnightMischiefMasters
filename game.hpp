@@ -24,7 +24,7 @@ class Game{
     SDL_Texture* assetOne=NULL;
     SDL_Texture* assetTwo=NULL;
 
-    SDL_Texture* collect=NULL;
+    SDL_Texture* paperOne=NULL;
 
     //for game music
     Mix_Music *gMusic = NULL;

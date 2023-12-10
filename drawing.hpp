@@ -9,5 +9,5 @@ class Drawing
         //global reference to png image sheets
         static SDL_Texture* assetOne;
         static SDL_Texture* assetTwo;
-        static SDL_Texture* collect;
+        static SDL_Texture* paperOne;
 };
