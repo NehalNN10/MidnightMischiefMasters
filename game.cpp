@@ -291,7 +291,7 @@ void Game::run()
 			}
 
 			// to pause and unpause the screen
-			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p)
+			if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p && (screen == 1 || screen == 2))
 			{
 				if (midNight->getPaused() == false)
 				{
@@ -311,13 +311,13 @@ void Game::run()
 				// Call your function to handle character movement
 				midNight->moveCharacters(currentKeyStates);
 			}
-			if (Mix_PlayingMusic()==0 && (screen==0 || screen == 3)) //playing music here
+			if (Mix_PlayingMusic()==0 && (screen !=1 && screen != 2)) //playing music here
 			{
 				Mix_PlayMusic(gMusic, -1);
 			}
 			else
 			{
-				if (Mix_PlayingMusic() && screen != 0 && screen != 3)
+				if (Mix_PlayingMusic() && (screen == 1 || screen == 2))
 					Mix_HaltMusic();
 			}
 		}

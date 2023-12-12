@@ -18,6 +18,11 @@ midMischief::~midMischief()
     std::cout<<"midMischief Dtor Called\n";
     // delete everything here
 }
+midMischief::~midMischief() 
+{
+    std::cout<<"midMischief Dtor Called\n";
+    // delete everything here
+}
 
 bool midMischief::getPaused() 
 { 
@@ -99,6 +104,7 @@ void midMischief::applyGravity()
         two->moverRect.y = two->currentY;
     }
 }
+
 
 void midMischief::animateCharacters()
 {

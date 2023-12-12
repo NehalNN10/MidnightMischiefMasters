@@ -24,6 +24,11 @@ void character::animation()
     srcRect = frames[frame];
 }
 
+bool character::jump_available()
+{
+    return character::moverRect.y + character::moverRect.h >= 450;
+}
+
 void character::move(char direction)
 {
     if (direction == 'U' && moverRect.y ==currentY)

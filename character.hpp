@@ -29,4 +29,12 @@ class character
         void animation();
         bool isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const map& map);
         void move(char direction);
+        bool jump_available();
+        void apply_gravity();
+        bool getleft(){return left;}
+        void setleft(bool x){left = x;};
+        bool getright(){return right;}
+        void setright(bool x){right = x;}
+        int get_x_jump(){ return x_jump; }
+        // void othermove();
 };
