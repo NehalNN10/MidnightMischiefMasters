@@ -35,6 +35,6 @@ class character
         void setleft(bool x){left = x;};
         bool getright(){return right;}
         void setright(bool x){right = x;}
-        int get_x_jump(){ return x_jump; }
+        int getJumpX(){ return jumpX; }
         // void othermove();
 };
