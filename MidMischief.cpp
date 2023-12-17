@@ -75,18 +75,10 @@ midMischief::midMischief()
 
     loadLevel(false);
 
-    // score = 0;
-    // one = new fireBoy(levels[currentLevel]->getPlayer1X(), levels[currentLevel]->getPlayer1Y());
-    // two = new waterGirl(levels[currentLevel]->getPlayer2X(), levels[currentLevel]->getPlayer2Y());
-
-    // for (int i = 0; i < 2; i++)
-    // {
-    //     collectiblesList.push_back(new paperOne({levels[currentLevel]->getPapersX()[i], levels[currentLevel]->getPapersY()[i], 50, 50}));
-    // }
     delete[] gaps;
 }
 
-void midMischief::loadLevel(bool x)
+void midMischief::loadLevel(bool x) // x indicates if level is currently on screen
 {
     if (x)
     {
