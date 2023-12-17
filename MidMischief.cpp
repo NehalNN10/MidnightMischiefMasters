@@ -37,6 +37,7 @@ midMischief::midMischief()
     for (int i = 0; i < 5; i++)
     {
         collectiblesList.push_back(new paperOne({rand() % (1000-50), rand() % (400-50), 50, 50}));
+        std::cout << "This is where the crash happens!" << std::endl;
     }
 }
 midMischief::~midMischief() 

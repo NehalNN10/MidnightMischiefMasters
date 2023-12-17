@@ -8,12 +8,12 @@ Level::Level(int p1X, int p1Y, int p2X, int p2Y, int cX, int cY, int *ppX, int *
 
 Level::~Level()
 {
-    delete[] paperPositionsX;
-    delete[] paperPositionsY;
-    delete levelMap;
-    paperPositionsX = nullptr;
-    paperPositionsY = nullptr;
-    levelMap = nullptr;
+    // delete[] paperPositionsX;
+    // delete[] paperPositionsY;
+    // delete levelMap;
+    // paperPositionsX = nullptr;
+    // paperPositionsY = nullptr;
+    // levelMap = nullptr;
     std::cout << "Level destroyed!" << std::endl;
 }
 
