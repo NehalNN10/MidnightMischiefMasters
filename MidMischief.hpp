@@ -46,5 +46,5 @@ class midMischief {
         void allCollisions();
         void showScore();
         void textScore();
-        void loadLevel(int currentLevel);
+        void loadLevel(bool x);
 };
