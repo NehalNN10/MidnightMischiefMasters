@@ -22,7 +22,8 @@ waterGirl::waterGirl()
 waterGirl::~waterGirl() 
 {
     std::cout<<"waterGirl Dtor Called\n";
-    // should delete here?
+    delete[] frames;
+    frames = nullptr;
 } 
 
 void waterGirl::draw() 

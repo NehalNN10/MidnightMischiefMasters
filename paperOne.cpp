@@ -27,4 +27,6 @@ paperOne::paperOne(SDL_Rect mR)
 paperOne::~paperOne()
 {
     std::cout<<"paperOne Dtor Called\n";
+    delete[] frames;
+    frames = nullptr;
 }

@@ -5,13 +5,14 @@ collectibles::collectibles()
 {
     std::cout<<"collectibles Ctor Called\n";
     collected = false;
+    frames = new SDL_Rect[9];
 }
 
 collectibles::~collectibles()
 {
     std::cout<<"collectibles Dtor Called\n";
-    // delete all the attributes here, change it all to dynamic and delete them
-    // delete all the 15 frames as well
+    delete[] frames;
+    frames = nullptr;
 }
 
 void collectibles::draw() 

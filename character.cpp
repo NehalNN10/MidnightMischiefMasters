@@ -4,17 +4,25 @@
 character::character()
 {
     std::cout<<"character Ctor Called\n";
+    flag = true;
+    jumpX = 20;
+    jumpY = 75;
+    gravity = 0;
+    frames = new SDL_Rect[4];
+    currentY = 400;
 }
 
 character::~character()
 {
     std::cout<<"character Dtor Called\n";
+    delete[] frames;
+    frames = nullptr;
 }
 
 // draws character
 void character::draw()
 {
-    // implemenatation in derived classes
+    // implementation in derived classes
 }
 
 // changes animation of character
@@ -96,6 +104,5 @@ bool character::isMoveValid(int currentX, int currentY, int destinationX, int de
             return true; // Valid move
         }
     }
-
     return false; // Invalid move
 }
