@@ -24,6 +24,7 @@ class midMischief {
         character *one; // fireboy
         character *two; // watergirl
         std::vector<collectibles*> collectiblesList;
+        std::vector<collectibles*> elementsToDelete;
 
         char directionOne;
         char directionTwo;
@@ -45,4 +46,5 @@ class midMischief {
         void allCollisions();
         void showScore();
         void textScore();
+        void loadLevel(int currentLevel);
 };

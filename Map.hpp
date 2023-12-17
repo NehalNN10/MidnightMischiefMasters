@@ -20,5 +20,5 @@ public:
 
     map();
     ~map();
-    void foo();
+    // void foo();
 };

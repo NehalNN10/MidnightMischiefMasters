@@ -24,8 +24,6 @@ midMischief::midMischief()
 
     // TODO: no cleanup needed, they are handled in the destructor for level
 
-    std::cout << "Deleting level here?" << std::endl;
-    theMap->foo();
     levels.push_back(new Level(30, 0, 60, 0, 400, 200, ppX, ppY, theMap));
 
     // TODO: modify map constructor such that it takes in values to create a custom map
@@ -175,12 +173,20 @@ void midMischief::allCollisions()
         {
             auto it = std::find(collectiblesList.begin(), collectiblesList.end(), element);
             collectiblesList.erase(it);
+
+            // elementsToDelete.push_back(element);
+
             // deleting from memory after the element has been collected
-            // std::cout << "Error?" << std::endl;
-            delete *it;
-            *it = nullptr;
+            // delete *it;
+            // *it = nullptr;
+            // delete element;
+            // element=nullptr;
         }
     }
+    // for (auto d: elementsToDelete)
+    // {
+    //     delete d;
+    // }
 }
 
 void midMischief::showScore()
