@@ -28,5 +28,13 @@ enemy::~enemy()
 
 void enemy::draw()
 {
-    SDL_RenderCopy(Drawing::gRenderer, Drawing::assetOne, &srcRect, &moverRect);
+    // SDL_RenderCopy(Drawing::gRenderer, Drawing::assetOne, &srcRect, &moverRect);
+}
+
+void enemy::movee(int x, int y)
+{
+    // SDL_Rect r = {x, y, 50, 50};
+    SDL_Rect r = {x, y, 50, 50};
+    SDL_RenderCopy(Drawing::gRenderer, Drawing::assetOne, &srcRect, &r);
+
 }

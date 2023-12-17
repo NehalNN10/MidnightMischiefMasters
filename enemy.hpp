@@ -3,10 +3,12 @@
 #include "character.hpp"
 #include "drawing.hpp"
 
+
 class enemy : public character
 {
     public:
         enemy();
         ~enemy();
         void draw();
+        void movee(int, int);
 };

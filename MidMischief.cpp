@@ -56,8 +56,9 @@ void midMischief::chaser()
         // std::cout<<myvec[i]<<" ";
         // std::cout<<myvec[i].getX()<<" "<<myvec[i].getY();
         // three->draw();
-        three->moverRect = {myvec[i].getX(),myvec[i].getY(),50,50};
-        std::cout<<three->moverRect.x<<std::endl;
+        three->movee(myvec[i].getX()*map::NUM_BLOCKS_X,myvec[i].getY()*map::NUM_BLOCKS_Y);
+        // three->moverRect = {myvec[i].getX()*map::NUM_BLOCKS_X,myvec[i].getY()*map::NUM_BLOCKS_Y,50,50};
+        // std::cout<<three->moverRect.x<<three->moverRect.y<<std::endl;
         // three->moverRect.y = myvec[i].getY();
 
     }
