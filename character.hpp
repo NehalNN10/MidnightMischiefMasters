@@ -6,22 +6,21 @@
 class character 
 {
     private:
-        bool flag = true;
-        int jumpX = 20;
-        int jumpY = 75;
+        bool flag;
+        int jumpX;
+        int jumpY;
+        int gravity;
+        map graph;
 
     protected:
         // for animations
         int frame;
-        SDL_Rect* frames = new SDL_Rect[4];
-
+        SDL_Rect* frames;
+        
     public:
-        int gravity = 0;
-        int currentY = 400;
-
+        int currentY;
         // source and mover rectangle
         SDL_Rect srcRect, moverRect;
-        map graph;
 
         character();
         ~character();
@@ -29,4 +28,5 @@ class character
         void animation();
         bool isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const map& map);
         void move(char direction);
+        void printCurrentPosition();
 };

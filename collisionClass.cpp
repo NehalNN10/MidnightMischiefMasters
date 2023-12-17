@@ -20,17 +20,16 @@ bool collisionClass::collisionChecker( SDL_Rect a, SDL_Rect b )
     rightB = b.x + b.w;
     topB = b.y;
     bottomB = b.y + b.h;    
+
     //If any of the sides from A are outside of B
     if( bottomA <= topB )
     {
         return false;
     }
-
     if( topA >= bottomB )
     {
         return false;
     }
-
     if( rightA <= leftB )
     {
         return false;
@@ -40,7 +39,7 @@ bool collisionClass::collisionChecker( SDL_Rect a, SDL_Rect b )
     {
         return false;
     }
-
+    
     //If none of the sides from A are outside B
     return true;
 }

@@ -17,6 +17,11 @@ midMischief::~midMischief()
 {
     std::cout<<"midMischief Dtor Called\n";
     // delete everything here
+    delete gwindow;
+    gwindow = nullptr;
+    delete one;
+    delete two;
+    one = two = nullptr;
 }
 
 bool midMischief::getPaused() 
@@ -37,6 +42,8 @@ void midMischief::drawCharacters()
     {
         element->draw();
     }
+    one->printCurrentPosition();
+    // two->printCurrentPosition();
 }
 
 // asynchronous movement achieved
@@ -128,6 +135,9 @@ void midMischief::allCollisions()
         {
             auto it = std::find(collectiblesList.begin(), collectiblesList.end(), element);
             collectiblesList.erase(it);
+            // deleting from memory after the element has been collected
+            delete *it;
+            *it = nullptr;
         }
     }
 }

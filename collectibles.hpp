@@ -7,12 +7,11 @@ class collectibles
     protected:
         // for animations
         int frame;
-        SDL_Rect* frames = new SDL_Rect[9];
+        SDL_Rect* frames;
 
     public:
         // source and mover rectangle
         SDL_Rect srcRect, moverRect;
-
         bool collected;
 
         collectibles();
