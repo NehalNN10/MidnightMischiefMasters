@@ -37,6 +37,7 @@ public:
     void run();
     
     bool gameStart();
+    bool win();
     bool gamePause();
     bool controls();
     bool howToPlay();

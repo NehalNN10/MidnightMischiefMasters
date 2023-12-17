@@ -94,6 +94,19 @@ bool Game::gameStart()
 	}
 	return success;
 }
+bool Game::win()
+{
+	// Loading success flag
+	bool success = true;
+	gTexture = loadTexture("Assets/win.png");
+	screen = 1;
+	if (gTexture == NULL)
+	{
+		printf("Unable to run due to error: %s\n", SDL_GetError());
+		success = false;
+	}
+	return success;
+}
 
 bool Game::gamePause()
 {
@@ -344,6 +357,14 @@ void Game::run()
 			// shows score
 			midNight->textScore();
 			midNight->showScore();
+			if (midNight->lvlinc()) {
+				win();
+				// break;
+				screen = 9;
+			}
+		}
+		else if (screen == 9) {
+			win();
 		}
 
 		SDL_RenderPresent(Drawing::gRenderer); // displays the updated renderer
