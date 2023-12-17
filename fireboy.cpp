@@ -22,7 +22,8 @@ fireBoy::fireBoy(int x, int y)
 fireBoy::~fireBoy()
 {
     std::cout<<"fireBoy Dtor Called\n";
-    // should delete here?
+    delete[] frames;
+    frames = nullptr;
 } 
 
 void fireBoy::draw()
