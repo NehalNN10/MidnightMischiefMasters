@@ -12,6 +12,7 @@ collectibles::~collectibles()
 {
     std::cout<<"collectibles Dtor Called\n";
     delete[] frames;
+    std::cout << "Error here?" << std::endl;
     frames = nullptr;
 }
 

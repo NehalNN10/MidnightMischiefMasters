@@ -19,7 +19,7 @@ midMischief::midMischief()
     map *theMap = new map();
     ppX[0] = 0;
     ppX[1] = 200;
-    ppY[0] = 0;
+    ppY[0] = 300;
     ppY[1] = 0;
 
     // TODO: no cleanup needed, they are handled in the destructor for level
@@ -80,7 +80,7 @@ void midMischief::drawCharacters()
     {
         element->draw();
     }
-    one->printCurrentPosition();
+    // one->printCurrentPosition();
     // two->printCurrentPosition();
 }
 
@@ -176,6 +176,7 @@ void midMischief::allCollisions()
             auto it = std::find(collectiblesList.begin(), collectiblesList.end(), element);
             collectiblesList.erase(it);
             // deleting from memory after the element has been collected
+            // std::cout << "Error?" << std::endl;
             delete *it;
             *it = nullptr;
         }

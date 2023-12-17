@@ -28,7 +28,6 @@ class character
         void animation();
         bool isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const map* map);
         void move(char direction, map* levelMap);
-        int getJumpX(){ return jumpX; }
         // void othermove();
         void printCurrentPosition();
 };
