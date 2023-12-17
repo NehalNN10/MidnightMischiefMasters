@@ -28,4 +28,5 @@ class character
         void animation();
         bool isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const map& map);
         void move(char direction);
+        void printCurrentPosition();
 };

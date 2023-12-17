@@ -19,6 +19,14 @@ character::~character()
     frames = nullptr;
 }
 
+// current Positions 
+void character::printCurrentPosition()
+{
+    std::cout<<"current x: "<<moverRect.x;
+    std::cout<<"current y: "<<moverRect.y;
+    std::cout<<"\n";
+}
+
 // draws character
 void character::draw()
 {

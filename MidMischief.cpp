@@ -42,6 +42,8 @@ void midMischief::drawCharacters()
     {
         element->draw();
     }
+    one->printCurrentPosition();
+    // two->printCurrentPosition();
 }
 
 // asynchronous movement achieved
