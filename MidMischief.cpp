@@ -12,8 +12,6 @@ midMischief::midMischief()
 
     // ? creating levels here:
 
-    std::cout << "lol" << std::endl;
-
     // decide paper positions here: (these are garbage values, will change on the basis of "CAREFUL" planning)
 
     int *ppX = new int[2];
@@ -24,21 +22,11 @@ midMischief::midMischief()
     ppY[0] = 0;
     ppY[1] = 0;
 
-    // TODO: cleanup needed
-
-    // for (int i = 0; i < 3; ++i)
-    // {
-    //     levels[i] = nullptr;
-    // }
+    // TODO: no cleanup needed, they are handled in the destructor for level
 
     std::cout << "Deleting level here?" << std::endl;
     theMap->foo();
     levels.push_back(new Level(30, 0, 60, 0, 400, 200, ppX, ppY, theMap));
-    // theMap->foo();
-    // levels[0]->setMap(theMap);
-    // theMap->foo();
-    std::cout << "Deleting level here?" << std::endl;
-
 
     // TODO: modify map constructor such that it takes in values to create a custom map
 
@@ -57,6 +45,7 @@ midMischief::midMischief()
     {
         collectiblesList.push_back(new paperOne({levels[currentLevel]->getPapersX()[i], levels[currentLevel]->getPapersY()[i], 50, 50}));
     }
+
 }
 midMischief::~midMischief()
 {
