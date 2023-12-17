@@ -29,11 +29,11 @@ bool character::jump_available()
     return character::moverRect.y + character::moverRect.h >= 450;
 }
 
-void character::move(char direction)
+void character::move(char direction, map* levelMap)
 {
     if (direction == 'U' && moverRect.y ==currentY)
     {
-        if (moverRect.y - jumpY > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y - jumpY, graph))
+        if (moverRect.y - jumpY > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y - jumpY, levelMap))
         //if (moverRect.y - jumpY > 0)
             {// moverRect.y -= jumpY;
             //gravity = -80;
@@ -46,7 +46,7 @@ void character::move(char direction)
     }
     //else if (direction == 'D')
     //{
-        if (flag && moverRect.y + jumpY < 550 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y + jumpY, graph))
+        if (flag && moverRect.y + jumpY < 550 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y + jumpY, levelMap))
         //if (moverRect.y + jumpY < 550)
         {
             //moverRect.y += jumpY;
@@ -56,7 +56,7 @@ void character::move(char direction)
     //}
     if (direction == 'R')
     {
-        if (moverRect.x + jumpX < 950 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x + jumpX, moverRect.y, graph))
+        if (moverRect.x + jumpX < 950 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x + jumpX, moverRect.y, levelMap))
         //if (moverRect.x + jumpX < 950)
             {moverRect.x += jumpX;
             flag = true;
@@ -67,7 +67,7 @@ void character::move(char direction)
     }
     else if (direction == 'L')
     {
-         if (moverRect.x - jumpX > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x - jumpX, moverRect.y, graph))
+         if (moverRect.x - jumpX > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x - jumpX, moverRect.y, levelMap))
         //if (moverRect.x - jumpX > 0)
             {moverRect.x -= jumpX;
             flag = true;
@@ -77,24 +77,24 @@ void character::move(char direction)
     }
 }
 
-bool character::isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const map &map)
+bool character::isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const map* levelMap)
 {
-    int destNodeX = destinationX / map::BLOCK_WIDTH;
-    int destNodeY = destinationY / map::BLOCK_HEIGHT;
+    int destNodeX = destinationX / levelMap->BLOCK_WIDTH;
+    int destNodeY = destinationY / levelMap->BLOCK_HEIGHT;
 
-    int currentNodeX = currentX / map::BLOCK_WIDTH;
-    int currentNodeY = currentY / map::BLOCK_HEIGHT;
+    int currentNodeX = currentX / levelMap->BLOCK_WIDTH;
+    int currentNodeY = currentY / levelMap->BLOCK_HEIGHT;
 
     // Check if the destination node is connected to the current node
-    const mapNode &currentNode = map.nodes[currentNodeX][currentNodeY];
+    const mapNode &currentNode = levelMap->nodes[currentNodeX][currentNodeY];
 
     // std::cout << "Current Node: (" << currentNodeX << ", " << currentNodeY << ")" << std::endl;
     // std::cout << "Destination Node: (" << destNodeX << ", " << destNodeY << ")" << std::endl;
 
     for (int connectedNode : currentNode.connectedNodes)
     {
-        int connectedNodeX = connectedNode / map::NUM_BLOCKS_Y;
-        int connectedNodeY = connectedNode % map::NUM_BLOCKS_Y;
+        int connectedNodeX = connectedNode / levelMap->NUM_BLOCKS_Y;
+        int connectedNodeY = connectedNode % levelMap->NUM_BLOCKS_Y;
 
         if (destNodeX == connectedNodeX && destNodeY == connectedNodeY)
         {

@@ -8,6 +8,8 @@
 #include "collisionClass.hpp"
 #include "paperOne.hpp"
 #include "drawing.hpp"
+#include "level.hpp"
+#include "Map.hpp"
 
 #include "vector"
 #include <iostream>
@@ -27,6 +29,8 @@ class midMischief {
         char directionTwo;
         bool paused;
         int score;
+        int currentLevel;
+        Level* levels;
 
     public:
 

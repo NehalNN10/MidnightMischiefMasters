@@ -5,18 +5,39 @@
 midMischief::midMischief() 
 {
     std::cout<<"midMischief Ctor Called\n";
+    levels = new Level[3];
+    currentLevel = 0; // modify this after every level is completed
+
+    //TODO: create getters in level class
+
+    // ? creating levels here:
+
+    // decide paper positions here: (these are garbage values, will change on the basis of "CAREFUL" planning)
+
+    int* ppX = new int[2];
+    int* ppY = new int[2];
+    map* theMap;
+    ppX[0] = 0;
+    ppX[1] = 200;
+    ppY[0] = 0;
+    ppY[1] = 0;
+
+    //TODO: cleanup needed
+
+    levels[0] = {30, 0, 60, 0, 400, 200, ppX, ppY, theMap};
+
+    //TODO: modify map constructor such that it takes in values to create a custom map
+    
     score = 0;
-    one = new fireBoy();
-    two = new waterGirl();
+    one = new fireBoy(levels[currentLevel].getPlayer1X(), levels[currentLevel].getPlayer1Y());
+    two = new waterGirl(levels[currentLevel].getPlayer2X(), levels[currentLevel].getPlayer2Y());
+
+    //TODO: modify population of collectiblesList to match the level
+
     for (int i = 0; i < 5; i++)
     {
         collectiblesList.push_back(new paperOne({rand() % (1000-50), rand() % (400-50), 50, 50}));
     }
-}
-midMischief::~midMischief() 
-{
-    std::cout<<"midMischief Dtor Called\n";
-    // delete everything here
 }
 midMischief::~midMischief() 
 {
@@ -84,8 +105,8 @@ void midMischief::moveCharacters(const Uint8* keyStates)
     }
 
     // passing in characters as they take less space than sdlkey objects
-    two->move(directionOne); 
-    one->move(directionTwo);
+    two->move(directionOne, levels[currentLevel].getMap());
+    one->move(directionTwo, levels[currentLevel].getMap());
     directionOne = ' ';
     directionTwo = ' ';
 }

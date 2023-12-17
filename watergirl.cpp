@@ -1,7 +1,7 @@
 #include <iostream>
 #include "waterGirl.hpp"
 
-waterGirl::waterGirl() 
+waterGirl::waterGirl(int x, int y) 
 {    
     std::cout<<"waterGirl Ctor Called\n";
 
@@ -16,7 +16,7 @@ waterGirl::waterGirl()
     srcRect = frames[0];
 
     // default co-ords to spawn character
-    moverRect = {50, 400, 50, 50};
+    moverRect = {x, y, 50, 50};
 }
 
 waterGirl::~waterGirl() 

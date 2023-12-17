@@ -5,7 +5,7 @@
 class waterGirl : public character 
 {
     public:
-        waterGirl();
+        waterGirl(int x, int y);
         ~waterGirl();
         void draw();
 };

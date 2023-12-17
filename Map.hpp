@@ -1,3 +1,4 @@
+#pragma once
 #include "mapNode.hpp"
 
 class map {

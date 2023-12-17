@@ -5,7 +5,7 @@
 class fireBoy : public character 
 {
     public:
-        fireBoy();
+        fireBoy(int x, int y);
         ~fireBoy();
         void draw();
 };

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "fireBoy.hpp"
 
-fireBoy::fireBoy()
+fireBoy::fireBoy(int x, int y)
 {  
     std::cout<<"fireBoy Ctor Called\n";
 
@@ -16,7 +16,7 @@ fireBoy::fireBoy()
     srcRect = frames[0];
 
     // default co-ords to spawn character
-    moverRect = {850, 400, 50, 50};
+    moverRect = {x, y, 50, 50};
 }
 
 fireBoy::~fireBoy()
