@@ -11,8 +11,8 @@ collectibles::collectibles()
 collectibles::~collectibles()
 {
     std::cout<<"collectibles Dtor Called\n";
-    delete[] frames;
-    frames = nullptr;
+    // delete[] frames;
+    // frames = nullptr;
 }
 
 void collectibles::draw() 

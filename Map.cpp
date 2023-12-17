@@ -1,4 +1,7 @@
 #include <iostream>
+#include <queue>
+#include <climits>
+#include <vector>
 #include "map.hpp"
 
 map::map(){
@@ -30,4 +33,57 @@ map::map(){
 map::~map()
 {
     std::cout<<"map Dtor Called\n";
+}
+
+void map::dijkstra(int srcX, int srcY, int destX, int destY) {
+    const int inf = INT_MAX;
+    std::vector<std::vector<bool>> visited(NUM_BLOCKS_X, std::vector<bool>(NUM_BLOCKS_Y, false));
+
+    nodes[srcX][srcY].cost = 0;
+
+    using pii = std::pair<int, std::pair<int, int>>;
+    std::priority_queue<pii, std::vector<pii>, std::greater<pii>> minHeap;
+    minHeap.push({0, {srcX, srcY}});
+
+    while (!minHeap.empty()) {
+        int tempX = minHeap.top().second.first;
+        int tempY = minHeap.top().second.second;
+        minHeap.pop();
+
+        if (visited[tempX][tempY]) {
+            continue;
+        }
+
+        visited[tempX][tempY] = true;
+
+        for (int neighborIndex : nodes[tempX][tempY].connectedNodes) {
+            int neighborX = neighborIndex / NUM_BLOCKS_Y;
+            int neighborY = neighborIndex % NUM_BLOCKS_Y;
+            int weight = 1;
+
+            int cost = nodes[tempX][tempY].cost + weight;
+
+            if (cost < nodes[neighborX][neighborY].cost) {
+                nodes[neighborX][neighborY].cost = cost;
+                nodes[neighborX][neighborY].predecessor = {tempX, tempY};  // Update predecessor
+                minHeap.push({cost, {neighborX, neighborY}});
+            }
+        }
+    }
+}
+
+std::vector<mapNode> map::printPath(int destX, int destY) {
+    
+    std::vector <mapNode> result;
+    std::pair<int, int> current = {destX, destY};
+
+    while (current.first != -1 && current.second != -1) {
+        // std::cout << "(" << current.first << ", " << current.second << ")";
+        result.push_back(mapNode(current.first, current.second));
+        if (current != nodes[current.first][current.second].predecessor) {
+            std::cout << " <- ";
+        }
+        current = nodes[current.first][current.second].predecessor;
+    }
+    return result;
 }

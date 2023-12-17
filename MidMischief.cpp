@@ -8,6 +8,7 @@ midMischief::midMischief()
     score = 0;
     one = new fireBoy();
     two = new waterGirl();
+    three = new enemy();
     for (int i = 0; i < 5; i++)
     {
         collectiblesList.push_back(new paperOne({rand() % (1000-50), rand() % (400-50), 50, 50}));
@@ -38,12 +39,29 @@ void midMischief::drawCharacters()
 {
     one->draw();
     two->draw();
+    three->draw();
+    // std::cout<<three->moverRect.x<<" "<<three->moverRect.y<<std::endl;
     for (auto &element : collectiblesList)
     {
         element->draw();
     }
-    one->printCurrentPosition();
+    // one->printCurrentPosition();
     // two->printCurrentPosition();
+}
+void midMischief::chaser()
+{
+    graph.dijkstra(0,0,one->moverRect.x/map::NUM_BLOCKS_X,one->moverRect.y/map::NUM_BLOCKS_Y);
+    std::vector<mapNode> myvec = graph.printPath(one->moverRect.x/map::NUM_BLOCKS_X,one->moverRect.y/map::NUM_BLOCKS_Y);
+    for (int i =0; i < myvec.size(); i++) {
+        // std::cout<<myvec[i]<<" ";
+        // std::cout<<myvec[i].getX()<<" "<<myvec[i].getY();
+        // three->draw();
+        three->moverRect = {myvec[i].getX(),myvec[i].getY(),50,50};
+        std::cout<<three->moverRect.x<<std::endl;
+        // three->moverRect.y = myvec[i].getY();
+
+    }
+    std::cout<<std::endl;
 }
 
 // asynchronous movement achieved
@@ -111,6 +129,7 @@ void midMischief::animateCharacters()
 {
     one->animation();
     two->animation();
+    three->animation();
 
     for (auto &element : collectiblesList)
     {
@@ -136,8 +155,8 @@ void midMischief::allCollisions()
             auto it = std::find(collectiblesList.begin(), collectiblesList.end(), element);
             collectiblesList.erase(it);
             // deleting from memory after the element has been collected
-            delete *it;
-            *it = nullptr;
+            // delete *it;
+            // *it = nullptr;
         }
     }
 }

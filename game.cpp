@@ -330,7 +330,10 @@ void Game::run()
 		if (screen == 1)
 		{	
 			// draws both characs
+			midNight->chaser();
+
 			midNight->drawCharacters();
+			// midNight->chaser();
 			
 			// animates both characs
 			midNight->animateCharacters();

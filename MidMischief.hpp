@@ -8,6 +8,7 @@
 #include "collisionClass.hpp"
 #include "paperOne.hpp"
 #include "drawing.hpp"
+#include "enemy.hpp"
 
 #include "vector"
 #include <iostream>
@@ -21,7 +22,9 @@ class midMischief {
         // dynamically created for virual and polymorphic behaviour
         character *one; // fireboy
         character *two; // watergirl
+        character *three; // enemy
         std::vector<collectibles*> collectiblesList;
+        map graph;
 
         char directionOne;
         char directionTwo;
@@ -41,4 +44,5 @@ class midMischief {
         void allCollisions();
         void showScore();
         void textScore();
+        void chaser();
 };

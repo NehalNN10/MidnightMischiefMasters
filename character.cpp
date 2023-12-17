@@ -96,6 +96,9 @@ bool character::isMoveValid(int currentX, int currentY, int destinationX, int de
     int currentNodeX = currentX / map::BLOCK_WIDTH;
     int currentNodeY = currentY / map::BLOCK_HEIGHT;
 
+    // std::cout<<"destX: "<<destNodeX<<"destY: "<<destNodeY<<std::endl;
+    // std::cout<<"currentNodeX:"<<currentNodeX<<"currentNodeY:"<<currentNodeY<<std::endl;
+
     // Check if the destination node is connected to the current node
     const mapNode &currentNode = map.nodes[currentNodeX][currentNodeY];
 
@@ -106,6 +109,8 @@ bool character::isMoveValid(int currentX, int currentY, int destinationX, int de
     {
         int connectedNodeX = connectedNode / map::NUM_BLOCKS_Y;
         int connectedNodeY = connectedNode % map::NUM_BLOCKS_Y;
+
+        // std::cout<<"connectedx"<<connectedNodeX<<" connectedy"<<connectedNodeY<<std::endl;
 
         if (destNodeX == connectedNodeX && destNodeY == connectedNodeY)
         {

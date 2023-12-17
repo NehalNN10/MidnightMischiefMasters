@@ -19,4 +19,7 @@ public:
 
     map();
     ~map();
+    
+    void dijkstra(int srcX, int srcY, int destX, int destY);
+    std::vector<mapNode> printPath(int destX, int destY);
 };
