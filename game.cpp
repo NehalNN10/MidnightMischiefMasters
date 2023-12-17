@@ -261,8 +261,6 @@ void Game::run()
 			}
 			const Uint8 *currentKeyStates = SDL_GetKeyboardState(nullptr);
 
-			std::cout << "Crash?"<< std::endl;
-
 			// to click play, rules, quit, hard screen, medium screen, easy screen
 			if (e.type == SDL_MOUSEBUTTONDOWN)
 			{
@@ -324,7 +322,7 @@ void Game::run()
 			}
 		}
 
-		SDL_RenderClear(Drawing::gRenderer);					  // removes everything from renderer
+		SDL_RenderClear(Drawing::gRenderer);		//removes everything from renderer
 		SDL_RenderCopy(Drawing::gRenderer, gTexture, NULL, NULL); // Draws background to renderer
 
 		//***********************draw the objects here********************

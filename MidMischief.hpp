@@ -30,7 +30,7 @@ class midMischief {
         bool paused;
         int score;
         int currentLevel;
-        Level* levels;
+        std::vector<Level*> levels;
 
     public:
 

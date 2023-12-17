@@ -24,6 +24,11 @@ class Level
         int getPlayer2X();
         int getPlayer2Y();
 
+        int* getPapersX();
+        int* getPapersY();
+
+        void setMap(map* m);
+
         map* getMap();
 
         //TODO: implement getters for other attributes too

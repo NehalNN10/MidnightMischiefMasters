@@ -31,3 +31,8 @@ map::~map()
 {
     std::cout<<"map Dtor Called\n";
 }
+
+void map::foo()
+{
+    std::cout << "Joe mama?" << std::endl;
+}

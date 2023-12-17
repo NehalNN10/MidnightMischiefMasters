@@ -20,4 +20,5 @@ public:
 
     map();
     ~map();
+    void foo();
 };
