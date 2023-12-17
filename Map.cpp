@@ -1,7 +1,7 @@
 #include <iostream>
 #include "map.hpp"
 
-map::map(){
+map::map(int* gaps){
     std::cout<<"map Ctor Called\n";
     for (int i = 0; i < NUM_BLOCKS_X; ++i) {
             for (int j = 0; j < NUM_BLOCKS_Y; ++j) {
@@ -18,12 +18,14 @@ map::map(){
         }
 
         // Connect nodes vertically
-        int arr[NUM_BLOCKS_Y] = {0, 3, 23, 39, 19, 10, 10, 10};
+        // int arr[NUM_BLOCKS_Y] = {0, 3, 23, 39, 19, 10, 10, 10};
+        // int* arr = new int[8];
+        // int arr[NUM_BLOCKS_Y] = gaps;
 
 
         for (int j = 0; j < NUM_BLOCKS_Y - 1; j++) {
-            nodes[arr[j]][j].connectedNodes.push_back(arr[j] * NUM_BLOCKS_Y + (j + 1));
-            nodes[arr[j]][j + 1].connectedNodes.push_back(arr[j] * NUM_BLOCKS_Y + j);
+            nodes[gaps[j]][j].connectedNodes.push_back(gaps[j] * NUM_BLOCKS_Y + (j + 1));
+            nodes[gaps[j]][j + 1].connectedNodes.push_back(gaps[j] * NUM_BLOCKS_Y + j);
         }  
 }
 

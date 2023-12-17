@@ -10,7 +10,7 @@ class character
         int jumpX;
         int jumpY;
         int gravity;
-        map graph;
+        // map graph;
 
     protected:
         // for animations

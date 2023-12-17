@@ -16,7 +16,17 @@ midMischief::midMischief()
 
     int *ppX = new int[2];
     int *ppY = new int[2];
-    map *theMap = new map();
+    int *gaps = new int[8];
+    gaps[0] = 0;
+    gaps[1] = 3;
+    gaps[2] = 23;
+    gaps[3] = 39;
+    gaps[4] = 19;
+    gaps[5] = 10;
+    gaps[6] = 10;
+    gaps[7] = 10;
+    // gaps = {0, 3, 23, 39, 19, 10, 10, 10};
+     map *theMap = new map(gaps);
     ppX[0] = 0;
     ppX[1] = 200;
     ppY[0] = 300;
@@ -24,7 +34,7 @@ midMischief::midMischief()
 
     // TODO: no cleanup needed, they are handled in the destructor for level
 
-    levels.push_back(new Level(30, 0, 60, 0, 400, 200, ppX, ppY, theMap));
+    levels.push_back(new Level(850, 400, 50, 400, 400, 200, ppX, ppY, theMap));
 
     // TODO: modify map constructor such that it takes in values to create a custom map
 
@@ -33,12 +43,6 @@ midMischief::midMischief()
     two = new waterGirl(levels[currentLevel]->getPlayer2X(), levels[currentLevel]->getPlayer2Y());
 
     // TODO: modify population of collectiblesList to match the level
-
-    // for (int i = 0; i < 5; i++)
-    // {
-    //     collectiblesList.push_back(new paperOne({rand() % (1000-50), rand() % (400-50), 50, 50}));
-    // }
-
     for (int i = 0; i < 2; i++)
     {
         collectiblesList.push_back(new paperOne({levels[currentLevel]->getPapersX()[i], levels[currentLevel]->getPapersY()[i], 50, 50}));
