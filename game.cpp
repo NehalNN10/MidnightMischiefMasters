@@ -17,6 +17,7 @@ static int screen = 0; // decides whether game runs or not
 3 = how to play
 4 = credits
 5 = controls
+9 = win
 */
 
 bool Game::init()
@@ -276,6 +277,14 @@ void Game::run()
 			const Uint8 *currentKeyStates = SDL_GetKeyboardState(nullptr);
 
 			// to click play, rules, quit
+			
+			// win screen here!
+			if (screen == 9) 
+			{
+				win();
+				continue;
+			}
+
 			if (e.type == SDL_MOUSEBUTTONDOWN)
 			{
 				int xMouse, yMouse;
@@ -320,11 +329,12 @@ void Game::run()
 			}
 
 			// Handle movement
-			if (!midNight->getPaused())
+			if (!midNight->getPaused() && screen == 1 && screen != 9)
 			{
 				// Call your function to handle character movement
 				midNight->moveCharacters(currentKeyStates);
 			}
+
 			if (Mix_PlayingMusic()==0 && (screen !=1 && screen != 2)) //playing music here
 			{
 				Mix_PlayMusic(gMusic, -1);
@@ -359,16 +369,11 @@ void Game::run()
 			midNight->textScore();
 			midNight->showScore();
 
-			if (midNight->lvlinc()) {
-				win();
-				// break;
+			if (midNight->winCondition()) {
 				screen = 9;
 			}
 		}
-		else if (screen == 9) {
-			win();
-		}
-
+		std::cout<<"Current Screen-> "<<screen<<std::endl;
 		SDL_RenderPresent(Drawing::gRenderer); // displays the updated renderer
 
 		SDL_Delay(40); // causes sdl engine to delay for specified miliseconds

@@ -277,3 +277,10 @@ void midMischief::textScore()
     TTF_CloseFont(font);
     TTF_Quit();
 }
+
+bool midMischief::winCondition() 
+{
+    if (score == 2)
+        return true;
+    return false;
+}

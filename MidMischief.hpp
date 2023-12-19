@@ -48,12 +48,5 @@ class midMischief {
         void showScore(); // score
         void textScore();
         void loadLevel(bool x); // different levels
-        bool lvlinc() {
-            if (score == 2) {
-                score = 0;
-                currentLevel++;
-                return true;
-            }
-            return false;
-        }
+        bool winCondition();
 };
