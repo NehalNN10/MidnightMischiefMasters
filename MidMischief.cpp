@@ -224,14 +224,13 @@ void midMischief::allCollisions()
 {
     for (auto &element : collectiblesList)
     {   
-        // player one
-        if (collisionClass::collisionChecker(element->moverRect, two->moverRect) && element->collected == false) // static class function called here
+        if (*one == element && element->collected == false) // operator overloading to check for collisions
         {
             score++; // score increments
             element->collected = true; // making sure that element is deleted later after being collected
         }
         // player two
-        if (collisionClass::collisionChecker(element->moverRect, one->moverRect) && element->collected == false)
+        if (*two == element && element->collected == false) // operator overloading to check for collisions
         {
             score++;
             element->collected = true;
