@@ -99,7 +99,7 @@ bool Game::win()
 {
 	// Loading success flag
 	bool success = true;
-	gTexture = loadTexture("Assets/win.png");
+	gTexture = loadTexture("Assets/win.jpg");
 	screen = 1;
 	if (gTexture == NULL)
 	{
@@ -282,7 +282,10 @@ void Game::run()
 			if (screen == 9) 
 			{
 				win();
-				continue;
+				// playing music again, not currently working do
+				Mix_HaltMusic();
+				Mix_PlayMusic(gMusic, -1);
+				// continue;
 			}
 
 			if (e.type == SDL_MOUSEBUTTONDOWN)
@@ -336,7 +339,7 @@ void Game::run()
 			}
 
 			if (Mix_PlayingMusic()==0 && (screen !=1 && screen != 2)) //playing music here
-			{
+			{	
 				Mix_PlayMusic(gMusic, -1);
 			}
 			else
@@ -351,7 +354,7 @@ void Game::run()
 
 		//***********************draw the objects here********************
 
-		if (screen == 1)
+		if (midNight->getWon() == false && screen == 1)
 		{	
 			// draws both characs
 			midNight->drawCharacters();
@@ -371,9 +374,11 @@ void Game::run()
 
 			if (midNight->winCondition()) {
 				screen = 9;
+				midNight->setWon(true);
 			}
 		}
-		std::cout<<"Current Screen-> "<<screen<<std::endl;
+		// std::cout<<"Current Screen-> "<<screen<<std::endl; // debugging comment
+
 		SDL_RenderPresent(Drawing::gRenderer); // displays the updated renderer
 
 		SDL_Delay(40); // causes sdl engine to delay for specified miliseconds

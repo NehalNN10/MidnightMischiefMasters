@@ -33,6 +33,7 @@ class midMischief {
         bool paused;
         int score;
         int currentLevel;
+        bool won; // if won
 
     public:
 
@@ -49,4 +50,11 @@ class midMischief {
         void textScore();
         void loadLevel(bool x); // different levels
         bool winCondition();
+        // getter setter for bool won
+        bool getWon() {
+            return won;
+        }
+        void setWon(bool a) {
+            won = a;
+        }
 };

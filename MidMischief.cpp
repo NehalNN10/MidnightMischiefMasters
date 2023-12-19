@@ -7,6 +7,7 @@ midMischief::midMischief()
     std::cout << "midMischief Ctor Called\n";
 
     currentLevel = 0; // modify this after every level is completed
+    won = false;
 
     // TODO: create getters in level class
 
