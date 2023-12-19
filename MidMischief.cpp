@@ -106,11 +106,12 @@ void midMischief::loadLevel(bool x) // x indicates if level is currently on scre
 
 midMischief::~midMischief()
 {
+    // deleting all the levels and characters and everything in heap.
     std::cout << "midMischief Dtor Called\n";
 
     for (auto &level : levels)
     {
-        delete level;
+        delete level; // would call ~level() which would delete everything there as well
     }
     delete gwindow;
     gwindow = nullptr;
@@ -118,6 +119,8 @@ midMischief::~midMischief()
     delete two;
     one = two = nullptr;
 }
+
+// for pausing and unpausing the game
 
 bool midMischief::getPaused()
 {
@@ -129,6 +132,7 @@ void midMischief::togglePaused(bool p)
     paused = p;
 }
 
+// draw both characters as well as the collectibles
 void midMischief::drawCharacters()
 {
     one->draw();
@@ -187,6 +191,7 @@ void midMischief::moveCharacters(const Uint8 *keyStates)
     directionTwo = ' ';
 }
 
+// applying gravity to both characters, wont be used after graph implmentation
 void midMischief::applyGravity()
 {
     one->moverRect.y += 5;
@@ -202,6 +207,7 @@ void midMischief::applyGravity()
     }
 }
 
+// animating all the characters and all the collectibles
 void midMischief::animateCharacters()
 {
     one->animation();
@@ -213,15 +219,18 @@ void midMischief::animateCharacters()
     }
 }
 
+// checking collision between both characters and all the collectibles, if any found then score++
 void midMischief::allCollisions()
 {
     for (auto &element : collectiblesList)
-    {
-        if (collisionClass::collisionChecker(element->moverRect, two->moverRect) && element->collected == false)
+    {   
+        // player one
+        if (collisionClass::collisionChecker(element->moverRect, two->moverRect) && element->collected == false) // static class function called here
         {
-            score++;
-            element->collected = true;
+            score++; // score increments
+            element->collected = true; // making sure that element is deleted later after being collected
         }
+        // player two
         if (collisionClass::collisionChecker(element->moverRect, one->moverRect) && element->collected == false)
         {
             score++;
@@ -236,15 +245,16 @@ void midMischief::allCollisions()
     }
 }
 
+// Showing the score!
 void midMischief::showScore()
 {
-    TTF_Init();                                                                              // Initializes SDL_TTF for displaying text in
-    TTF_Font *font = TTF_OpenFont("Assets/arial.ttf", 24);                                   // Opens a font style that can be downloaded as a .ttf file and sets a font size
-    SDL_Color color = {0, 0, 0};                                                             // This is the texts color that can be changed using RGB values from 0 to 255.
-    std::string tmp = std::to_string(score);                                                 // converts score to string that can later be displayed using the font file - hence why we needed font.
-    SDL_Surface *surfacemessage = TTF_RenderText_Solid(font, tmp.c_str(), color);            // A surface is created using functions from SDL library that displays the score on the screen.
-    SDL_Texture *Message = SDL_CreateTextureFromSurface(Drawing::gRenderer, surfacemessage); // Converts into texture that can be displayed
-    SDL_Rect Message_rect = {944, 12, 50, 30};                                               // create a rect for it
+    TTF_Init();// Initializes SDL_TTF for displaying text in
+    TTF_Font *font = TTF_OpenFont("Assets/arial.ttf", 24);// Opens a font style that can be downloaded as a .ttf file and sets a font size
+    SDL_Color color = {0, 0, 0};// This is the texts color that can be changed using RGB values from 0 to 255.
+    std::string tmp = std::to_string(score);// converts score to string that can later be displayed using the font file - hence why we needed font.
+    SDL_Surface *surfacemessage = TTF_RenderText_Solid(font, tmp.c_str(), color);// A surface is created using functions from SDL library that displays the score on the screen.
+    SDL_Texture *Message = SDL_CreateTextureFromSurface(Drawing::gRenderer, surfacemessage);// Converts into texture that can be displayed
+    SDL_Rect Message_rect = {944, 12, 50, 30};// create a rect for it
     SDL_RenderCopy(Drawing::gRenderer, Message, NULL, &Message_rect);
     SDL_FreeSurface(surfacemessage);
     SDL_DestroyTexture(Message);
@@ -252,15 +262,16 @@ void midMischief::showScore()
     TTF_Quit();
 }
 
+// Showing "Score:"
 void midMischief::textScore()
 {
-    TTF_Init();                                                                              // Initializes SDL_TTF for displaying text in
-    TTF_Font *font = TTF_OpenFont("Assets/arial.ttf", 24);                                   // Opens a font style that can be downloaded as a .ttf file and sets a font size
-    SDL_Color color = {0, 0, 255};                                                             // This is the texts color that can be changed using RGB values from 0 to 255.
-    std::string tmp = "Papers collected : ";                                                // converts score to string that can later be displayed using the font file - hence why we needed font.
-    SDL_Surface *surfacemessage = TTF_RenderText_Solid(font, tmp.c_str(), color);            // A surface is created using functions from SDL library that displays the score on the screen.
-    SDL_Texture *Message = SDL_CreateTextureFromSurface(Drawing::gRenderer, surfacemessage); // Converts into texture that can be displayed
-    SDL_Rect Message_rect = {774, 12, 130, 30};                                              // create a rect for it
+    TTF_Init();// Initializes SDL_TTF for displaying text in
+    TTF_Font *font = TTF_OpenFont("Assets/arial.ttf", 24);// Opens a font style that can be downloaded as a .ttf file and sets a font size
+    SDL_Color color = {0, 0, 255};// This is the texts color that can be changed using RGB values from 0 to 255.
+    std::string tmp = "Papers collected : ";// converts score to string that can later be displayed using the font file - hence why we needed font.
+    SDL_Surface *surfacemessage = TTF_RenderText_Solid(font, tmp.c_str(), color);// A surface is created using functions from SDL library that displays the score on the screen.
+    SDL_Texture *Message = SDL_CreateTextureFromSurface(Drawing::gRenderer, surfacemessage);// Converts into texture that can be displayed
+    SDL_Rect Message_rect = {774, 12, 130, 30};// create a rect for it
     SDL_RenderCopy(Drawing::gRenderer, Message, NULL, &Message_rect);
     SDL_FreeSurface(surfacemessage);
     SDL_DestroyTexture(Message);

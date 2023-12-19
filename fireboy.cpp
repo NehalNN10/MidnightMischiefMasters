@@ -22,11 +22,12 @@ fireBoy::fireBoy(int x, int y)
 fireBoy::~fireBoy()
 {
     std::cout<<"fireBoy Dtor Called\n";
+    // deleting all the frames here
     delete[] frames;
     frames = nullptr;
 } 
 
 void fireBoy::draw()
 {
-    SDL_RenderCopy(Drawing::gRenderer, Drawing::assetOne, &srcRect, &moverRect);
+    SDL_RenderCopy(Drawing::gRenderer, Drawing::assetOne, &srcRect, &moverRect); // assetOne drawn
 }

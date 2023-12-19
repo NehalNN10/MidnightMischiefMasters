@@ -4,17 +4,17 @@
 collectibles::collectibles() 
 {
     std::cout<<"collectibles Ctor Called\n";
-    collected = false;
-    frames = new SDL_Rect[9];
+    collected = false; // false at the start
+    frames = new SDL_Rect[9]; // animation frames
 }
 
 collectibles::~collectibles()
 {
     std::cout<<"collectibles Dtor Called\n";
-    delete[] frames;
-    frames = nullptr;
+    delete[] frames; // deleted in heap
+    frames = nullptr; // no dangling pointer
 }
-
+// drawing that paperOne
 void collectibles::draw() 
 {
     SDL_RenderCopy(Drawing::gRenderer, Drawing::paperOne, &srcRect, &moverRect);

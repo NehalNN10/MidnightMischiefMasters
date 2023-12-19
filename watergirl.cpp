@@ -20,7 +20,8 @@ waterGirl::waterGirl(int x, int y)
 }
 
 waterGirl::~waterGirl() 
-{
+{  
+    // deleting all the objects here created on heap
     std::cout<<"waterGirl Dtor Called\n";
     delete[] frames;
     frames = nullptr;
@@ -28,5 +29,5 @@ waterGirl::~waterGirl()
 
 void waterGirl::draw() 
 {
-    SDL_RenderCopy(Drawing::gRenderer, Drawing::assetTwo, &srcRect, &moverRect);
+    SDL_RenderCopy(Drawing::gRenderer, Drawing::assetTwo, &srcRect, &moverRect); // drawing character
 }

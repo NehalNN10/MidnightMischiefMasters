@@ -8,7 +8,8 @@ Level::Level(int p1X, int p1Y, int p2X, int p2Y, int cX, int cY, int *ppX, int *
 }
 
 Level::~Level()
-{
+{   
+    // deleting current level objects so that the next one loads up
     delete[] paperPositionsX;
     delete[] paperPositionsY;
     delete levelMap;
@@ -18,6 +19,7 @@ Level::~Level()
     std::cout << "Level destroyed!" << std::endl;
 }
 
+// getter and setters
 int Level::getPlayer1X(){ return player1X; }
 int Level::getPlayer1Y(){ return player1Y; }
 int Level::getPlayer2X(){ return player2X; }

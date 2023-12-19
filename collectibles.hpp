@@ -12,10 +12,11 @@ class collectibles
     public:
         // source and mover rectangle
         SDL_Rect srcRect, moverRect;
+        // if that collectible is collected
         bool collected;
 
-        collectibles();
-        ~collectibles();
+        collectibles(); // ctor
+        ~collectibles(); // dtor
         void draw();
         void animation();
 };

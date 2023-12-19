@@ -1,7 +1,7 @@
 #include <iostream>
 #include "map.hpp"
 
-map::map(int* gaps){
+map::map(int* gaps){ // creating a map based on where we need the vertical gaps
     std::cout<<"map Ctor Called\n";
     for (int i = 0; i < NUM_BLOCKS_X; ++i) {
             for (int j = 0; j < NUM_BLOCKS_Y; ++j) {
@@ -22,7 +22,7 @@ map::map(int* gaps){
         // int* arr = new int[8];
         // int arr[NUM_BLOCKS_Y] = gaps;
 
-
+        // nodes connected vertically only when there is a gap between them, based on our background
         for (int j = 0; j < NUM_BLOCKS_Y - 1; j++) {
             nodes[gaps[j]][j].connectedNodes.push_back(gaps[j] * NUM_BLOCKS_Y + (j + 1));
             nodes[gaps[j]][j + 1].connectedNodes.push_back(gaps[j] * NUM_BLOCKS_Y + j);

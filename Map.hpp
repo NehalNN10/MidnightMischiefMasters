@@ -18,7 +18,7 @@ public:
     // 2D array to store nodes
     mapNode nodes[NUM_BLOCKS_X][NUM_BLOCKS_Y];
 
+    // ctor & dtor
     map(int* gaps);
     ~map();
-    // void foo();
 };

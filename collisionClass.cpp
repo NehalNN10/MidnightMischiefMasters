@@ -1,6 +1,7 @@
 #include<SDL.h>
 #include "collisionClass.hpp"
 
+// logic to check if collision has happened between the two characters.
 bool collisionClass::collisionChecker( SDL_Rect a, SDL_Rect b )
 {
     //The sides of the rectangles

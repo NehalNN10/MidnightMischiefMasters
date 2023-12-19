@@ -36,6 +36,7 @@ public:
     SDL_Texture* loadTexture( std::string path );
     void run();
     
+    // different screens implemented here
     bool gameStart();
     bool win();
     bool gamePause();

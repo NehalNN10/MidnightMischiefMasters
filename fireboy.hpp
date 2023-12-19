@@ -2,10 +2,10 @@
 #include "character.hpp"
 #include "drawing.hpp"
 
-class fireBoy : public character 
+class fireBoy : public character // inheritance
 {
     public:
-        fireBoy(int x, int y);
-        ~fireBoy();
-        void draw();
+        fireBoy(int x, int y); // param ctor
+        ~fireBoy(); // ctor
+        void draw() override; // override function
 };

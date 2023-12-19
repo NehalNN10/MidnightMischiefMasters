@@ -2,7 +2,8 @@
 #include "character.hpp"
 
 character::character()
-{
+{   
+    // constructing all the variables here
     std::cout<<"character Ctor Called\n";
     flag = true;
     jumpX = 20;
@@ -12,15 +13,16 @@ character::character()
     currentY = 400;
 }
 
-character::~character()
-{
+character::~character() 
+{   
+    // dtor used for deleting all objects created in heap
     std::cout<<"character Dtor Called\n";
     delete[] frames;
     frames = nullptr;
 }
 
-// current Positions 
-void character::printCurrentPosition()
+// current Positions for debugging
+void character::printCurrentPosition() 
 {
     std::cout<<"current x: "<<moverRect.x;
     std::cout<<"current y: "<<moverRect.y;
@@ -42,30 +44,27 @@ void character::animation()
 
 void character::move(char direction, map* levelMap)
 {
-    if (direction == 'U' && moverRect.y ==currentY)
+    if (direction == 'U' && moverRect.y ==currentY) // up and if currently on the ground
     {
-        if (moverRect.y - jumpY > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y - jumpY, levelMap))
-        //if (moverRect.y - jumpY > 0)
-            {// moverRect.y -= jumpY;
-            //gravity = -80;
-            moverRect.y -= 80;
+        if (moverRect.y - jumpY > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y - jumpY, levelMap)) // if move is valid
+        {
+            moverRect.y -= 80; // change the ground if jumped
             flag = false;}
-        else if (moverRect.y - 20 > 0){
+        else if (moverRect.y - 20 > 0){  
             moverRect.y -= 20;
         }
 
     }
-    //else if (direction == 'D')
-    //{
-        if (flag && moverRect.y + jumpY < 550 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y + jumpY, levelMap))
-        //if (moverRect.y + jumpY < 550)
-        {
-            //moverRect.y += jumpY;
-            currentY += 75;
-            flag = false;
-        }
+    // making the character fall down if there is no ground as in a gap in map.
+    if (flag && moverRect.y + jumpY < 550 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y + jumpY, levelMap))
+    //if (moverRect.y + jumpY < 550)
+    {
+        //moverRect.y += jumpY;
+        currentY += 75;
+        flag = false;
+    }
     //}
-    if (direction == 'R')
+    if (direction == 'R') // right movement
     {
         if (moverRect.x + jumpX < 950 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x + jumpX, moverRect.y, levelMap))
         //if (moverRect.x + jumpX < 950)
@@ -76,7 +75,7 @@ void character::move(char direction, map* levelMap)
                 }
             }
     }
-    else if (direction == 'L')
+    else if (direction == 'L') // left movement
     {
          if (moverRect.x - jumpX > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x - jumpX, moverRect.y, levelMap))
         //if (moverRect.x - jumpX > 0)
@@ -88,6 +87,7 @@ void character::move(char direction, map* levelMap)
     }
 }
 
+// Looks at the map. If there is a gap then true, else false.
 bool character::isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const map* levelMap)
 {
     int destNodeX = destinationX / levelMap->BLOCK_WIDTH;

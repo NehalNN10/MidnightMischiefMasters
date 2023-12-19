@@ -10,7 +10,6 @@ class character
         int jumpX;
         int jumpY;
         int gravity;
-        // map graph;
 
     protected:
         // for animations
@@ -24,10 +23,9 @@ class character
 
         character();
         ~character();
-        virtual void draw();
-        void animation();
+        virtual void draw(); // for polymorphism
+        void animation(); // derived objects also use this function.
         bool isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const map* map);
-        void move(char direction, map* levelMap);
-        // void othermove();
+        void move(char direction, map* levelMap); // actual movement for characters
         void printCurrentPosition();
 };

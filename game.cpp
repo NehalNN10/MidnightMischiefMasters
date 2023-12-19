@@ -172,7 +172,7 @@ bool Game::loadMedia()
 	Drawing::assetTwo = loadTexture("Assets/two.png");
 	Drawing::paperOne = loadTexture("Assets/paperOne.png");
 	// gTexture = loadTexture("background.jpg");
-	gTexture = loadTexture("Assets/Midnight mischief masters.png");
+	gTexture = loadTexture("Assets/Midnight mischief masters.png"); // main menu
 	if (gTexture == NULL || Drawing::assetTwo == NULL || Drawing::assetOne == NULL || Drawing::paperOne == NULL)
 	{
 		printf("Unable to run due to error: %s\n", SDL_GetError());
@@ -257,6 +257,7 @@ void Game::run()
 {
 	bool quit = false;
 	SDL_Event e;
+
 	// dynamic allocation
 	midMischief *midNight = new midMischief();
 
@@ -274,7 +275,7 @@ void Game::run()
 			}
 			const Uint8 *currentKeyStates = SDL_GetKeyboardState(nullptr);
 
-			// to click play, rules, quit, hard screen, medium screen, easy screen
+			// to click play, rules, quit
 			if (e.type == SDL_MOUSEBUTTONDOWN)
 			{
 				int xMouse, yMouse;
@@ -357,6 +358,7 @@ void Game::run()
 			// shows score
 			midNight->textScore();
 			midNight->showScore();
+
 			if (midNight->lvlinc()) {
 				win();
 				// break;
@@ -371,7 +373,7 @@ void Game::run()
 
 		SDL_Delay(40); // causes sdl engine to delay for specified miliseconds
 	}
-
+	// deleting the final object, calling its dtor. will delete all the chracters and levels
 	delete midNight;
 	midNight = nullptr;
 }

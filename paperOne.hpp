@@ -1,10 +1,9 @@
 #include <SDL.h>
 #include "collectibles.hpp"
 
-class paperOne : public collectibles
+class paperOne : public collectibles // inheritance
 {
     public:
-        paperOne(SDL_Rect mR);
-        ~paperOne();
-
+        paperOne(SDL_Rect mR); // param ctor
+        ~paperOne(); // dtor
 };
