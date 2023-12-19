@@ -31,10 +31,5 @@ class character
         bool isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const map* map);
         void move(char direction, map* levelMap); // actual movement for characters
         void printCurrentPosition();
-        bool operator == (const collectibles *c) // operator overloading
-            {   
-                if (collisionClass::collisionChecker(this->moverRect, c->moverRect)) // static class function called here
-                return true;
-            return false;
-            }
+        bool operator == (const collectibles *c); // operator overloading of the equality operator
 };

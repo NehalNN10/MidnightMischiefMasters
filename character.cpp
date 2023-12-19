@@ -21,6 +21,13 @@ character::~character()
     frames = nullptr;
 }
 
+bool character::operator == (const collectibles *c) // operator overloading
+{   
+    if (collisionClass::collisionChecker(this->moverRect, c->moverRect)) // static class function called here
+        return true;
+    return false;
+}
+
 // current Positions for debugging
 void character::printCurrentPosition() 
 {
