@@ -28,6 +28,7 @@ class Game{
 
     //for game music
     Mix_Music *gMusic = NULL;
+    Mix_Music *winMusic = NULL;
 
 public:
     bool init();
@@ -38,7 +39,7 @@ public:
     
     // different screens implemented here
     bool gameStart();
-    bool win();
+    bool winScreen();
     bool gamePause();
     bool controls();
     bool howToPlay();

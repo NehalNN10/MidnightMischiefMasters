@@ -95,15 +95,21 @@ bool Game::gameStart()
 	}
 	return success;
 }
-bool Game::win()
+bool Game::winScreen()
 {
 	// Loading success flag
 	bool success = true;
 	gTexture = loadTexture("Assets/win.jpg");
-	screen = 1;
+	screen = 9;
 	if (gTexture == NULL)
 	{
 		printf("Unable to run due to error: %s\n", SDL_GetError());
+		success = false;
+	}
+	winMusic = Mix_LoadMUS("Assets/win_music.mp3");
+	if (winMusic == NULL)
+	{
+		printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 		success = false;
 	}
 	return success;
@@ -222,6 +228,11 @@ void Game::close()
 		Mix_FreeMusic(gMusic);
 		gMusic = NULL;
 	}
+	if (winMusic != NULL)
+	{
+		Mix_FreeMusic(winMusic);
+		winMusic = NULL;
+	}
 
 	// Quit SDL Mixer
 	Mix_Quit();
@@ -278,15 +289,15 @@ void Game::run()
 
 			// to click play, rules, quit
 			
-			// win screen here!
-			if (screen == 9) 
-			{
-				win();
-				// playing music again, not currently working do
-				Mix_HaltMusic();
-				Mix_PlayMusic(gMusic, -1);
-				// continue;
-			}
+			// // win screen here!
+			// if (screen == 9) 
+			// {
+			// 	win();
+			// 	// playing music again, not currently working do
+			// 	Mix_HaltMusic();
+			// 	Mix_PlayMusic(gMusic, -1);
+			// 	// continue;
+			// }
 
 			if (e.type == SDL_MOUSEBUTTONDOWN)
 			{
@@ -340,7 +351,10 @@ void Game::run()
 
 			if (Mix_PlayingMusic()==0 && (screen !=1 && screen != 2)) //playing music here
 			{	
-				Mix_PlayMusic(gMusic, -1);
+				if (screen == 9)
+					Mix_PlayMusic(winMusic, 1);
+				else
+					Mix_PlayMusic(gMusic, -1);
 			}
 			else
 			{
@@ -372,9 +386,13 @@ void Game::run()
 			midNight->textScore();
 			midNight->showScore();
 
-			if (midNight->winCondition()) {
-				screen = 9;
-				midNight->setWon(true);
+			midNight->handleLevels();
+
+			// ? code for when the player wins the game
+			if (midNight->getWon()) {
+				// screen = 9;
+				winScreen();
+				// midNight->setWon(true);
 			}
 		}
 		// std::cout<<"Current Screen-> "<<screen<<std::endl; // debugging comment

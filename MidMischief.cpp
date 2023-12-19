@@ -104,6 +104,24 @@ void midMischief::loadLevel(bool x) // x indicates if level is currently on scre
     //TODO: add level completion code i.e. change level once both papers collected
 }
 
+void midMischief::handleLevels()
+{
+    if (collectiblesList.empty())
+    {
+        if (currentLevel < 2)
+        {
+            std::cout << "Level " << currentLevel+1 << " passed!" << std::endl;
+            currentLevel++;
+            loadLevel(true);
+        }
+        else
+        {
+            std::cout << "You have won the game!" << std::endl;
+            setWon(true);
+        }
+    }
+}
+
 
 midMischief::~midMischief()
 {
@@ -114,11 +132,18 @@ midMischief::~midMischief()
     {
         delete level; // would call ~level() which would delete everything there as well
     }
+
+    std::cout << levels.capacity() << std::endl;
+
     delete gwindow;
     gwindow = nullptr;
     delete one;
     delete two;
     one = two = nullptr;
+    for (auto &collectible : collectiblesList)
+    {
+        delete collectible;
+    }
 }
 
 // for pausing and unpausing the game
@@ -279,9 +304,9 @@ void midMischief::textScore()
     TTF_Quit();
 }
 
-bool midMischief::winCondition() 
-{
-    if (score == 2)
-        return true;
-    return false;
-}
+// bool midMischief::winCondition() 
+// {
+//     if (score == 2)
+//         return true;
+//     return false;
+// }

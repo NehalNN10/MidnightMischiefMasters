@@ -25,7 +25,6 @@ class midMischief {
         character *two; // watergirl
         // vectors for collectibles and levels, polymorphic behaviour
         std::vector<collectibles*> collectiblesList;
-        std::vector<collectibles*> elementsToDelete;
         std::vector<Level*> levels;
         // other necc variables
         char directionOne;
@@ -49,7 +48,6 @@ class midMischief {
         void showScore(); // score
         void textScore();
         void loadLevel(bool x); // different levels
-        bool winCondition();
         // getter setter for bool won
         bool getWon() {
             return won;
@@ -57,4 +55,5 @@ class midMischief {
         void setWon(bool a) {
             won = a;
         }
+        void handleLevels();
 };

@@ -13,7 +13,7 @@ class Level
         int* paperPositionsY;
         map* levelMap; // particular map for that level
         // if that particular level is completed or not.
-        bool completed;
+        // bool completed;
 
     public:
         Level() = default; // to facilitate creation of dynamic array for levels
@@ -34,6 +34,6 @@ class Level
 
         map* getMap();
 
-        //TODO: implement getters for other attributes too
+        bool isCompleted();
 
 };
