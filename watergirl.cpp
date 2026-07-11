@@ -23,8 +23,8 @@ waterGirl::~waterGirl()
 {  
     // deleting all the objects here created on heap
     std::cout<<"waterGirl Dtor Called\n";
-    delete[] frames;
-    frames = nullptr;
+    // delete[] frames;
+    // frames = nullptr;
 } 
 
 void waterGirl::draw() 

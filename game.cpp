@@ -7,6 +7,7 @@ SDL_Renderer *Drawing::gRenderer = NULL;
 SDL_Texture *Drawing::assetOne = NULL;
 SDL_Texture *Drawing::assetTwo = NULL;
 SDL_Texture *Drawing::paperOne = NULL;
+SDL_Texture *Drawing::brickTexture = NULL;
 
 static int screen = 0; // decides whether game runs or not
 
@@ -178,6 +179,13 @@ bool Game::loadMedia()
 	Drawing::assetOne = loadTexture("Assets/one.png");
 	Drawing::assetTwo = loadTexture("Assets/two.png");
 	Drawing::paperOne = loadTexture("Assets/paperOne.png");
+
+	Drawing::brickTexture = loadTexture("Assets/brick.png");
+	if (Drawing::brickTexture == NULL) {
+		printf("Failed to load brick texture!\n");
+		success = false;
+	}
+
 	// gTexture = loadTexture("background.jpg");
 	gTexture = loadTexture("Assets/Midnight mischief masters.png"); // main menu
 	if (gTexture == NULL || Drawing::assetTwo == NULL || Drawing::assetOne == NULL || Drawing::paperOne == NULL)
@@ -206,6 +214,9 @@ void Game::close()
 	SDL_DestroyTexture(gTexture);
 	SDL_DestroyTexture(Drawing::paperOne);
 	Drawing::paperOne = NULL;
+
+	SDL_DestroyTexture(Drawing::brickTexture);
+	Drawing::brickTexture = NULL;
 
 	// Destroy window
 	SDL_DestroyRenderer(Drawing::gRenderer);

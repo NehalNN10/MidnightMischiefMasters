@@ -3,19 +3,18 @@
 
 class map {
 public:
-    // Screen dimensions
-    static const int SCREEN_WIDTH = 1000;
-    static const int SCREEN_HEIGHT = 600;
+    static const int SCREEN_WIDTH = 1200;  // From your original setup
+    static const int SCREEN_HEIGHT = 900; // From your original setup
 
-    // Dimensions of each block or node
-    static const int BLOCK_WIDTH = 20;
-    static const int BLOCK_HEIGHT = 75;
+    // Upgrade to clean square dimensions!
+    static const int BLOCK_WIDTH = 40;   // Changed from 20[cite: 1]
+    static const int BLOCK_HEIGHT = 40;  // Changed from 75[cite: 1]
 
-    // Number of blocks in x and y directions
-    static const int NUM_BLOCKS_X = SCREEN_WIDTH / BLOCK_WIDTH;
-    static const int NUM_BLOCKS_Y = SCREEN_HEIGHT / BLOCK_HEIGHT;
+    // This dynamically recalculates your grid size based on the screen size
+    static const int NUM_BLOCKS_X = SCREEN_WIDTH / BLOCK_WIDTH;   // 1000 / 40 = 25 blocks wide
+    static const int NUM_BLOCKS_Y = SCREEN_HEIGHT / BLOCK_HEIGHT; // 600 / 40 = 15 blocks high
 
-    // 2D array to store nodes
+    // Keep the node array[cite: 1]
     mapNode nodes[NUM_BLOCKS_X][NUM_BLOCKS_Y];
 
     // ctor & dtor

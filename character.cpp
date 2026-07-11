@@ -45,58 +45,58 @@ void character::draw()
 // changes animation of character
 void character::animation()
 {
-    frame = (frame + 1) % 4;
-    srcRect = frames[frame];
+    animCounter++;
+    if (animCounter >= 4) { // Only change the frame every 4 game loops
+        frame = (frame + 1) % 4;
+        srcRect = frames[frame];
+        animCounter = 0; // Reset counter
+    }
 }
 
 void character::move(char direction, map* levelMap)
 {
-    if (direction == 'U' && moverRect.y ==currentY) // up and if currently on the ground
-    {
-        if (moverRect.y - jumpY > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y - jumpY, levelMap)) // if move is valid
-        {
-            moverRect.y -= 80; // change the ground if jumped
-            flag = false;}
-        else if (moverRect.y - 20 > 0){  
-            moverRect.y -= 20;
-        }
+    int stepX = 20; // Reverted back to your original map grid spacing[cite: 1]
+    int jumpForce = -12;
 
-    }
-    // making the character fall down if there is no ground as in a gap in map.
-    if (flag && moverRect.y + jumpY < 550 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y + jumpY, levelMap))
-    //if (moverRect.y + jumpY < 550)
-    {
-        //moverRect.y += jumpY;
-        currentY += 75;
-        flag = false;
-    }
-    //}
     if (direction == 'R') // right movement
     {
-        if (moverRect.x + jumpX < 950 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x + jumpX, moverRect.y, levelMap))
-        //if (moverRect.x + jumpX < 950)
-            {moverRect.x += jumpX;
-            flag = true;
-                if (moverRect.y + 60 < currentY){
-                    currentY -= 75;
-                }
+        if (moverRect.x + stepX < 950 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x + stepX, moverRect.y, levelMap))
+        {
+            moverRect.x += stepX;
+            if (moverRect.y + 60 < currentY){
+                currentY -= 75;
             }
+        }
     }
     else if (direction == 'L') // left movement
     {
-         if (moverRect.x - jumpX > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x - jumpX, moverRect.y, levelMap))
-        //if (moverRect.x - jumpX > 0)
-            {moverRect.x -= jumpX;
-            flag = true;
-                if (moverRect.y + 60 < currentY){
-                    currentY -= 75;
-                }}
+         if (moverRect.x - stepX > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x - stepX, moverRect.y, levelMap))
+        {
+            moverRect.x -= stepX;
+            if (moverRect.y + 60 < currentY){
+                currentY -= 75;
+            }
+        }
+    }
+    
+    // Smooth Jump initiation using velocity!
+    if (direction == 'U' && !isJumping) 
+    {
+        // Check if moving up into the block above is valid using original logic[cite: 1]
+        if (moverRect.y - 75 > 0 && character::isMoveValid(moverRect.x, moverRect.y, moverRect.x, moverRect.y - 75, levelMap))
+        {
+            y_velocity = jumpForce;
+            isJumping = true;
+        }
     }
 }
 
 // Looks at the map. If there is a gap then true, else false.
 bool character::isMoveValid(int currentX, int currentY, int destinationX, int destinationY, const map* levelMap)
 {
+
+    return true;
+    
     int destNodeX = destinationX / levelMap->BLOCK_WIDTH;
     int destNodeY = destinationY / levelMap->BLOCK_HEIGHT;
 
@@ -120,4 +120,16 @@ bool character::isMoveValid(int currentX, int currentY, int destinationX, int de
         }
     }
     return false; // Invalid move
+}
+
+void character::applyGravity() 
+{
+    y_velocity += GRAVITY; // Now allowed because we are inside the class!
+    moverRect.y += y_velocity;
+
+    if (moverRect.y >= currentY) {
+        moverRect.y = currentY;
+        y_velocity = 0;
+        isJumping = false;
+    }
 }

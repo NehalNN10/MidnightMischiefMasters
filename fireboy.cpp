@@ -23,8 +23,8 @@ fireBoy::~fireBoy()
 {
     std::cout<<"fireBoy Dtor Called\n";
     // deleting all the frames here
-    delete[] frames;
-    frames = nullptr;
+    // delete[] frames;
+    // frames = nullptr;
 } 
 
 void fireBoy::draw()

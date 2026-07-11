@@ -18,6 +18,10 @@ class character
         // for animations
         int frame;
         SDL_Rect* frames;
+        float y_velocity = 0.0f;
+        bool isJumping = false;
+        const float GRAVITY = 1.2f;
+        int animCounter = 0;
         
     public:
         int currentY;
@@ -32,4 +36,5 @@ class character
         void move(char direction, map* levelMap); // actual movement for characters
         void printCurrentPosition();
         bool operator == (const collectibles *c); // operator overloading of the equality operator
+        void applyGravity(); // Add this line under public
 };

@@ -1,5 +1,6 @@
 #include <iostream>
-#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
+#include <algorithm>
 #include "midMischief.hpp"
 
 midMischief::midMischief()
@@ -9,13 +10,19 @@ midMischief::midMischief()
     currentLevel = 0; // modify this after every level is completed
     won = false;
 
-    // TODO: create getters in level class
+    // Inside midMischief::midMischief() constructor:
+    std::vector<int> ppX = {0, 200};
+    std::vector<int> ppY = {300, 0};
+
+    std::vector<int> ppX_2 = {0, 200};
+    std::vector<int> ppY_2 = {300, 0};
+
+    std::vector<int> ppX_3 = {0, 200};
+    std::vector<int> ppY_3 = {300, 0};
 
     // ? creating levels here:
 
     // decide paper positions here: (these are garbage values, will change on the basis of "CAREFUL" planning)
-    int *ppX = new int[2];
-    int *ppY = new int[2];
     int *gaps = new int[8];
     gaps[0] = 0;
     gaps[1] = 3;
@@ -27,13 +34,7 @@ midMischief::midMischief()
     gaps[7] = 10;
     // gaps = {0, 3, 23, 39, 19, 10, 10, 10};
     map *theMap = new map(gaps);
-    ppX[0] = 0;
-    ppX[1] = 200;
-    ppY[0] = 300;
-    ppY[1] = 0;
 
-    int *ppX_2 = new int[2];
-    int *ppY_2 = new int[2];
     int *gaps_2 = new int[8];
     gaps_2[0] = 0;
     gaps_2[1] = 3;
@@ -45,13 +46,7 @@ midMischief::midMischief()
     gaps_2[7] = 10;
     // gaps_2 = {0, 3, 23, 39, 19, 10, 10, 10};
     map *theMap_2 = new map(gaps_2);
-    ppX_2[0] = 0;
-    ppX_2[1] = 200;
-    ppY_2[0] = 300;
-    ppY_2[1] = 0;
 
-    int *ppX_3 = new int[2];
-    int *ppY_3 = new int[2];
     int *gaps_3 = new int[8];
     gaps_3[0] = 0;
     gaps_3[1] = 3;
@@ -63,11 +58,6 @@ midMischief::midMischief()
     gaps_3[7] = 10;
     // gaps_3 = {0, 3, 23, 39, 19, 10, 10, 10};
     map *theMap_3 = new map(gaps_3);
-    ppX_3[0] = 0;
-    ppX_3[1] = 200;
-    ppY_3[0] = 300;
-    ppY_3[1] = 0;
-
     // TODO: no cleanup needed, they are handled in the destructor for level
 
     levels.push_back(new Level(850, 400, 50, 400, 400, 200, ppX, ppY, theMap));
@@ -217,20 +207,11 @@ void midMischief::moveCharacters(const Uint8 *keyStates)
     directionTwo = ' ';
 }
 
-// applying gravity to both characters, wont be used after graph implmentation
-void midMischief::applyGravity()
+// applying gravity to both characters
+void midMischief::applyGravity() 
 {
-    one->moverRect.y += 5;
-    if (one->moverRect.y >= one->currentY)
-    {
-        one->moverRect.y = one->currentY;
-    }
-
-    two->moverRect.y += 5;
-    if (two->moverRect.y >= two->currentY)
-    {
-        two->moverRect.y = two->currentY;
-    }
+    one->applyGravity();
+    two->applyGravity();
 }
 
 // animating all the characters and all the collectibles
